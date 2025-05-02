@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    tools:context=".home.conocenos.ConocenosFragment">
+
+    <!-- Botón de regreso -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/back_button"
+        app:tint="#265caf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Contenido desplazable -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:padding="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Título -->
+            <TextView
+                android:id="@+id/titleConocenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conócenos"
+                android:textColor="#265CAF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Carrusel Horizontal -->
+            <HorizontalScrollView
+                android:id="@+id/conocenosCarousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:scrollbars="none"
+                android:clipToPadding="false">
+
+                <LinearLayout
+                    android:id="@+id/conocenosLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- Tarjeta 1 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="270dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="160dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_personal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Nuestro Personal"
+                                android:textColor="#265CAF"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="Personal calificado y eficiente para cada tarea."
+                                android:textColor="#555555"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Tarjeta 2 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="269dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="177dp"
+                                android:layout_height="159dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_atencion" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Atención al Cliente"
+                                android:textColor="#265CAF"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="Servicio personalizado y asistencia continua."
+                                android:textColor="#555555"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Tarjeta 3 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="273dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="173dp"
+                                android:layout_height="150dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_soporte" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Soporte Técnico"
+                                android:textColor="#265CAF"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="Disponibilidad permanente 24/7 para nuestros clientes."
+                                android:textColor="#555555"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Tarjetas Misión y Visión -->
+            <include layout="@layout/card_mision" />
+            <include layout="@layout/card_vision" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

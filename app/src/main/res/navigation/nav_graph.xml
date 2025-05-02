@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="App Navigation"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Fragmento de Inicio -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.vconexionsas.home.inicio.InicioFragment"
+        android:label="Inicio"
+        android:layout="@layout/fragment_inicio">
+
+        <action
+            android:id="@+id/action_home_to_plan"
+            app:destination="@id/planFragment" />
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_home_to_speedTestFragment"
+            app:destination="@id/speedTestFragment" />
+        <action
+            android:id="@+id/action_home_to_servicios"
+            app:destination="@id/serviciosFragment" />
+        <action
+            android:id="@+id/action_home_to_factura"
+            app:destination="@id/facturaFragment" />
+        <action
+            android:id="@+id/action_home_to_contrasena"
+            app:destination="@id/contraFragment"/>
+        <action
+            android:id="@+id/action_home_to_conocenos"
+            app:destination="@+id/conocenosFragment">
+        </action>
+    </fragment>
+
+    <!-- Fragmento de Planes -->
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.example.vconexionsas.home.plan.PlanFragment"
+        android:label="Planes"
+        android:layout="@layout/fragment_planes" />
+
+    <!-- Fragmento de SpeedTest -->
+    <fragment
+        android:id="@+id/speedTestFragment"
+        android:name="com.example.vconexionsas.home.speedtest.SpeedTestFragment"
+        android:label="SpeedTest"
+        android:layout="@layout/fragment_speedtest" />
+
+    <!-- Fragmento de Perfil -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.vconexionsas.home.perfil.PerfilFragment"
+        android:label="Perfil"
+        android:layout="@layout/fragment_perfil" />
+
+    <!-- Fragmento de Servicios -->
+    <fragment
+        android:id="@+id/serviciosFragment"
+        android:name="com.example.vconexionsas.home.servicios.ServiciosFragment"
+        android:label="Servicios"
+        android:layout="@layout/fragment_servicios" />
+
+    <!-- Fragmento de domótica -->
+    <fragment
+        android:id="@+id/domoticaFragment"
+        android:name="com.example.vconexionsas.home.servicios.DomoticaFragment"
+        android:label="Domótica"
+        tools:layout="@layout/fragment_domotica" />
+
+    <!-- Fragmento de Conocenos -->
+    <fragment
+        android:id="@+id/conocenosFragment"
+        android:name="com.example.vconexionsas.home.conocenos.ConocenosFragment"
+        android:label="Conocenos"
+        tools:layout="@layout/fragment_conocenos" />
+
+    <action
+        android:id="@+id/action_servicios_to_domoticaFragment"
+        app:destination="@id/domoticaFragment" />
+
+    <!-- Fragmento de Facturas -->
+    <fragment
+        android:id="@+id/facturaFragment"
+        android:name="com.example.vconexionsas.home.factura.FacturaFragment"
+        android:label="Factura"
+        android:layout="@layout/fragment_factura" />
+
+    <!-- Fragmento de Cableado Estructurado -->
+    <fragment
+        android:id="@+id/cableadoEstructuradoFragment"
+        android:name="com.example.vconexionsas.home.servicios.CableadoEstructuradoFragment"
+        android:label="Cableado Estructurado"
+        tools:layout="@layout/fragment_cableado_estructurado" />
+
+    <action
+        android:id="@+id/action_inicioFragment_to_cableadoEstructuradoFragment"
+        app:destination="@id/cableadoEstructuradoFragment" />
+
+    <!-- Fragmento de IPTV -->
+    <fragment
+        android:id="@+id/iptvFragment"
+        android:name="com.example.vconexionsas.home.servicios.IPTVFragment"
+        android:label="IPTV"
+        android:layout="@layout/fragment_iptv" />
+
+    <action
+        android:id="@+id/action_servicios_to_iptv"
+        app:destination="@id/iptvFragment" />
+
+    <!-- Fragmento de CCTV -->
+    <fragment
+        android:id="@+id/cctvFragment"
+        android:name="com.example.vconexionsas.home.servicios.CCTVFragment"
+        android:label="IPTV"
+        android:layout="@layout/fragment_cctv" />
+
+    <action
+        android:id="@+id/action_servicios_to_cctv"
+        app:destination="@id/cctvFragment" />
+
+    <action
+        android:id="@+id/action_perfilFragment_to_notificacionesFragment"
+        app:destination="@id/notificacionesFragment" />
+
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.example.vconexionsas.notificacion.NotificacionesFragment"
+        android:label="Notificaciones" />
+
+    <fragment
+        android:id="@+id/politicasFragment"
+        android:name="com.example.vconexionsas.home.perfil.PoliticasFragment"
+        android:label="Políticas de  Privacidad"/>
+
+    <action
+        android:id="@+id/action_perfilFragment_to_politicasFragment"
+        app:destination="@+id/politicasFragment">
+    </action>
+
+    <!-- Fragmento de Cambio de Contraseña -->
+    <fragment
+        android:id="@+id/contraFragment"
+        android:name="com.example.vconexionsas.home.contrasena.ContrasenaFragment"
+        android:label="Cambio Contraseña"
+        android:layout="@layout/fragment_contrasena">
+
+        <!-- Aquí está el error corregido: la acción está ahora dentro del fragmento correcto -->
+        <action
+            android:id="@+id/action_contrasenaFragment_to_adcFragment"
+            app:destination="@id/adcFragment"/>
+        <action
+            android:id="@+id/action_contrasenaFragment_to_easy4linkFragment"
+            app:destination="@id/easy4linkFragment" />
+        <action
+            android:id="@+id/action_contrasenaFragment_to_tplinkFragment"
+            app:destination="@+id/tplinkFragment"/>
+        <action
+            android:id="@+id/action_contrasenaFragment_to_laticFragment"
+            app:destination="@+id/laticFragment"/>
+        <action
+            android:id="@+id/action_contrasenaFragment_to_zkxxFragment"
+            app:destination="@+id/zkxxFragment"/>
+        <action
+            android:id="@+id/action_contrasenaFragment_to_ztecFragment"
+            app:destination="@+id/ztecFragment"/>
+
+    </fragment>
+
+    <!-- Fragmento para ADC -->
+    <fragment
+        android:id="@+id/adcFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.AdcFragment"
+        android:label="ADC" />
+
+    <!-- Fragmento para Easy4Link -->
+    <fragment
+        android:id="@+id/easy4linkFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.Easy4linkFragment"
+        android:label="Easy4Link" />
+
+    <!-- Fragmento Tplink-->
+    <fragment
+        android:id="@+id/tplinkFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.TplinkFragment"
+        android:label="Tplink"/>
+
+    <!-- Fragmento Latic-->
+    <fragment
+        android:id="@+id/laticFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.LaticFragment"
+        android:label="Latic"/>
+
+    <!-- Fragmento ZKXX-->
+    <fragment
+        android:id="@+id/zkxxFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.ZkxxFragment"
+        android:label="ZKXX"/>
+
+    <!-- Fragmento ZteC-->
+    <fragment
+        android:id="@+id/ztecFragment"
+        android:name="com.example.vconexionsas.home.contrasena.onus.ZteCFragment"
+        android:label="ZteC">
+
+    </fragment>
+
+
+</navigation>
+
+

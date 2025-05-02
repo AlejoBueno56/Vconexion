@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título del Plan -->
+        <TextView
+            android:id="@+id/planTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plan Familiar"
+            android:textSize="20sp"
+            android:textColor="#265caf"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Velocidad del Plan -->
+        <TextView
+            android:id="@+id/planSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50 MB"
+            android:textSize="18sp"
+            android:textColor="#555555"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Precio del Plan -->
+        <TextView
+            android:id="@+id/planPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$65,000 COP"
+            android:textSize="18sp"
+            android:textColor="#265caf"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Contenedor dinámico de características -->
+        <LinearLayout
+            android:id="@+id/planFeaturesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón de Contacto -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/contactButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Contáctanos"
+            android:textColor="#ffffff"
+            android:backgroundTint="#265caf"
+            android:textSize="16sp"
+            app:cornerRadius="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

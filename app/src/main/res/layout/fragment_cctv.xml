@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    tools:context=".home.servicios.CCTVFragment">
+
+    <!-- Botón de regreso -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/back_button"
+        app:tint="#265caf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ScrollView para el contenido -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:padding="10dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Título principal -->
+            <TextView
+                android:id="@+id/cctvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CCTV - Seguridad Total"
+                android:textColor="#265CAF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Imagen principal -->
+            <ImageView
+                android:id="@+id/cctvImageMain"
+                android:layout_width="320dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cctvmain" />
+
+            <!-- Tarjeta: ¿Por qué elegir Vconexión? -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/cctvSubtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¿Por qué elegir Vconexión?"
+                        android:textColor="#333333"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/cctvDescription1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ofrecemos soluciones de CCTV adaptadas a tus necesidades, con equipos de alta tecnología y personal especializado para garantizar tu seguridad 24/7."
+                        android:textColor="#555555"
+                        android:textSize="16sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Imagen secundaria -->
+            <ImageView
+                android:id="@+id/cctvImageSecondary"
+                android:layout_width="320dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cctvcams" />
+
+            <!-- Tarjeta: Servicios que ofrecemos -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/cctvSubtitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servicios que Ofrecemos"
+                        android:textColor="#333333"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/cctvDescription2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Instalación de cámaras HD y 4K\n• Monitoreo remoto 24/7\n• Mantenimiento preventivo y correctivo\n• Soporte técnico especializado"
+                        android:textColor="#555555"
+                        android:textSize="16sp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Imagen beneficios -->
+            <ImageView
+                android:id="@+id/cctvImageBenefits"
+                android:layout_width="320dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cctvbenefits" />
+
+            <!-- Tarjeta: Beneficios -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/cctvSubtitle3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Beneficios de Nuestros Sistemas"
+                        android:textColor="#265CAF"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:id="@+id/cctvDescription3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✔️ Seguridad continua 24/7\n\n✔️ Grabaciones de alta calidad\n\n✔️ Acceso remoto desde cualquier dispositivo\n\n✔️ Reducción de riesgos y pérdidas"
+                        android:textColor="#555555"
+                        android:textSize="16sp"
+                        android:gravity="start" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- Botón de contacto -->
+            <Button
+                android:id="@+id/contactButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#265CAF"
+                android:textColor="#FFFFFF"
+                android:text="CONTÁCTANOS"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

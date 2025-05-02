@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">VCUsuarios</string>
+    <string name="logo_desc">Logo de la aplicación</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="login_subtitle">Ingrese sus credenciales para continuar</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="olvide_contrasena">¿Olvidaste tu contraseña?</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="no_tienes_cuenta">¿No tienes una cuenta?</string>
+    <string name="registrarse">Regístrate aquí</string>
+    <string name="back_button">Atrás</string>
+    <!-- Título del menú principal -->
+    <string name="menu_principal_titulo">Menú Principal</string>
+
+    <!-- Opciones del menú principal -->
+    <string name="menu_factura">Factura</string>
+    <string name="menu_speedtest">Speedtest</string>
+    <string name="menu_planes">Planes</string>
+    <string name="menu_servicios">Nuestros Servicios</string>
+
+    <!-- Texto para el botón flotante -->
+    <string name="fab_chat_description">Chat</string>
+
+    <!-- Etiquetas de navegación inferior -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_buscar">Buscar</string>
+    <string name="nav_guardados">Guardados</string>
+    <string name="nav_perfil">Perfil</string>
+
+    <!-- Mensajes informativos -->
+    <string name="loading_message">Cargando...</string>
+    <string name="error_message">Ha ocurrido un error. Inténtalo de nuevo.</string>
+    <string name="connection_error">Error de conexión. Verifica tu red.</string>
+
+    <!-- Títulos de secciones -->
+    <string name="seccion_factura_titulo">Tu Factura</string>
+    <string name="seccion_speedtest_titulo">Prueba de Velocidad</string>
+    <string name="seccion_planes_titulo">Nuestros Planes</string>
+    <string name="seccion_servicios_titulo">Servicios Disponibles</string>
+    <string name="instrucciones_contrasena">
+1. Acércate a tu ONU o Módem.\n
+2. Verifica que no haya ningún LED en rojo.\n
+3. Verifica en la parte posterior o inferior el modelo de la ONU.\n
+4. Selecciona la imagen de acuerdo al modelo de la ONU.\n
+5. En la parte inferior derecha selecciona la opción de autocompletar.\n
+6. Busca la ventana "Network", selecciona la opción "WLAN".\n
+7. Entra a "Security" y donde dice "WPA Passphrase" puedes cambiar la contraseña.\n
+8. Guarda los cambios en la opción "Submit".
+</string>
+    <string name="selecciona_mes_anio">Selecciona mes y año</string>
+    <string name="buscar_factura">Buscar factura</string>
+
+</resources>
