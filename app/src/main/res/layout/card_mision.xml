@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    app:cardCornerRadius="16dp"
+    app:strokeColor="#265CAF"
+    app:strokeWidth="2dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_mision_vision"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_mision_transparent"
+            android:alpha="0.05"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Misión"
+            android:textColor="#265CAF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vconexión es una empresa que presta el servicio en sistemas de comunicación por fibra óptica, utilizando equipos y redes de última tecnología, brindando a sus clientes una excelente conectividad, aportando a su crecimiento tecnológico, competitivo y económico en su región y alrededores."
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:gravity="center" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

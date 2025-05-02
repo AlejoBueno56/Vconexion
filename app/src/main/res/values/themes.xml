@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.VconexionSAS" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Puedes agregar personalizaciones aquí -->
+    </style>
+</resources>

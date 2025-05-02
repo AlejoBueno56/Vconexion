@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "81312518796",
+    "project_id": "vconexionsas-3125f",
+    "storage_bucket": "vconexionsas-3125f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81312518796:android:a26263331fdae1205a21a9",
+        "android_client_info": {
+          "package_name": "com.example.vconexionsas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANb6BCn3HefDotWgdkptjExc2NZzRyx9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

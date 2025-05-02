@@ -1,0 +1,9 @@
+# Evita subir archivos innecesarios
+.gradle/
+.idea/
+*.iml
+build/
+*.apk
+*.keystore
+.DS_Store
+node_modules/
