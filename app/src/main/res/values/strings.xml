@@ -50,5 +50,13 @@
 </string>
     <string name="selecciona_mes_anio">Selecciona mes y año</string>
     <string name="buscar_factura">Buscar factura</string>
+    <string name="recuperar_contrasena">Recuperar Contraseña</string>
+    <string name="correo_electronico">Correo electrónico</string>
+    <string name="enviar_codigo">Enviar código</string>
+    <string name="ingresa_tu_correo">Por favor ingresa tu correo</string>
+    <string name="respuesta_invalida">Respuesta inesperada del servidor</string>
+    <string name="validando_correo">Validando correo...</string>
+    <string name="correo_enviado">Código enviado al correo registrado</string>
+    <string name="correo_no_encontrado">El correo no está registrado</string>
 
 </resources>

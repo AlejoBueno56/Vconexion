@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.requestPermissions
@@ -16,10 +17,10 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import com.example.vconexionsas.R
 import com.example.vconexionsas.home.HomeActivity
 import com.google.android.material.textfield.TextInputEditText
-import org.json.JSONObject
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.io.IOException
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("INICIO_SESION", "Expiración: $exp vs ahora: $ahora")
         Log.d("INICIO_SESION", "Sesión válida: ${isSesionValida(this)}")
 
-
         // ✅ Verificar si ya hay sesión guardada
         if (isSesionValida(this)) {
             val intent = Intent(this, HomeActivity::class.java)
@@ -48,6 +48,13 @@ class MainActivity : AppCompatActivity() {
 
         // 🔓 Si no hay sesión, mostrar pantalla de login
         setContentView(R.layout.loginvisual)
+
+        val forgotPassword = findViewById<TextView>(R.id.forgot_password)
+        forgotPassword.setOnClickListener {
+            // ✅ Lanzar la nueva actividad (no el fragmento)
+            val intent = Intent(this, OlvideContrasenaActivity::class.java)
+            startActivity(intent)
+        }
 
         val inputUsuario = findViewById<TextInputEditText>(R.id.input_usuario)
         val inputContrasena = findViewById<TextInputEditText>(R.id.input_contrasena)
@@ -80,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 🔔 Pedir permiso de notificaciones si es Android 13+
+        // 🔔 Permisos de notificación (Android 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED
@@ -108,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         callback: (Boolean) -> Unit
     ) {
         val client = OkHttpClient()
-        val url = "https://loginc.vconexion.com/apiclient.php"
+        val url = "http://192.168.115.118/apiclient.php"
 
         val json = JSONObject().apply {
             put("cedula", cedula)
@@ -181,7 +188,6 @@ class MainActivity : AppCompatActivity() {
                             apply()
                         }
 
-                        // 🟡 Si es temporal, redirigir a cambio de contraseña
                         if (status == "temporal" || necesitaCambio) {
                             Toast.makeText(context, "Debe cambiar su contraseña temporal", Toast.LENGTH_SHORT).show()
                             val intent = Intent(context, CambiarContrasenaActivity::class.java)
@@ -192,7 +198,6 @@ class MainActivity : AppCompatActivity() {
                             return@post
                         }
 
-                        // ✅ Si es login completo, guardar token y continuar
                         val token = data.optString("token", "")
                         val expiracion = data.optLong("expiracion", 0)
 
@@ -214,17 +219,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-
 }
-    // ✅ Función global para validar sesión
-    fun isSesionValida(context: Context): Boolean {
-        val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val token = prefs.getString("token", null)
-        val codigoUsuario = prefs.getString("codigo_usuario", null)
-        val expiracion = prefs.getLong("expiracion", 0L)
-        val ahora = System.currentTimeMillis() / 1000
 
-        return !token.isNullOrEmpty() && !codigoUsuario.isNullOrEmpty() && expiracion > ahora
-    }
+fun isSesionValida(context: Context): Boolean {
+    val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+    val token = prefs.getString("token", null)
+    val codigoUsuario = prefs.getString("codigo_usuario", null)
+    val expiracion = prefs.getLong("expiracion", 0L)
+    val ahora = System.currentTimeMillis() / 1000
+    return !token.isNullOrEmpty() && !codigoUsuario.isNullOrEmpty() && expiracion > ahora
+}
+
 

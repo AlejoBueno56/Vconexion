@@ -56,7 +56,7 @@ class CambiarContrasenaActivity : AppCompatActivity() {
 
     private fun cambiarContrasena(cedula: String, nuevaContrasena: String) {
         val client = OkHttpClient()
-        val url = "https://loginc.vconexion.com/apiclient.php"
+        val url = "http://192.168.115.118/apiclient.php"
 
         val json = JSONObject().apply {
             put("cedula", cedula)
