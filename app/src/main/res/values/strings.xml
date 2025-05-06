@@ -58,5 +58,11 @@
     <string name="validando_correo">Validando correo...</string>
     <string name="correo_enviado">Código enviado al correo registrado</string>
     <string name="correo_no_encontrado">El correo no está registrado</string>
+    <!-- Configuración de perfil -->
+    <string name="titulo_config">Configuración de Perfil</string>
+    <string name="cambiar_foto">Cambiar Foto</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="imagen_perfil">Imagen de perfil del usuario</string>
 
 </resources>
