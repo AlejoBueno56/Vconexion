@@ -68,6 +68,10 @@
 
     <action android:id="@+id/action_perfilFragment_to_politicasFragment" app:destination="@+id/politicasFragment" />
 
+    <fragment android:id="@+id/configFragment" android:name="com.example.vconexionsas.home.perfil.ConfigFragment" android:label="Configuración de Perfil "/>
+
+    <action android:id="@+id/action_perfilFragment_to_configFragment" app:destination="@+id/configFragment" />
+
     <!-- Fragmento de Cambio de Contraseña -->
     <fragment android:id="@+id/contraFragment" android:name="com.example.vconexionsas.home.contrasena.ContrasenaFragment" android:label="Cambio Contraseña" android:layout="@layout/fragment_contrasena">
         <action android:id="@+id/action_contrasenaFragment_to_adcFragment" app:destination="@id/adcFragment" />
@@ -85,12 +89,7 @@
     <fragment android:id="@+id/zkxxFragment" android:name="com.example.vconexionsas.home.contrasena.onus.ZkxxFragment" android:label="ZKXX" />
     <fragment android:id="@+id/ztecFragment" android:name="com.example.vconexionsas.home.contrasena.onus.ZteCFragment" android:label="ZteC" />
 
-    <!-- Recuperación de Contraseña -->
-    <fragment android:id="@+id/olvideContrasenaFragment" android:name="com.example.vconexionsas.login.OlvideContrasenaFragment" android:label="OlvideContraseña">
-        <action android:id="@+id/action_olvideContrasenaFragment_to_validarTokenFragment" app:destination="@id/validarTokenFragment" />
-    </fragment>
 
-    <fragment android:id="@+id/validarTokenFragment" android:name="com.example.vconexionsas.login.ValidarTokenFragment" android:label="ValidarToken" />
 
 
 

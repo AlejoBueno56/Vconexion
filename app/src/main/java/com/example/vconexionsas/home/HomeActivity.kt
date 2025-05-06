@@ -2,11 +2,10 @@ package com.example.vconexionsas.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.vconexionsas.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.navigation.ui.NavigationUI
 
 class HomeActivity : AppCompatActivity() {
 
@@ -14,28 +13,21 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // Obtén el NavController del NavHostFragment
+        // Obtener el NavHostFragment y el NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Configura el BottomNavigationView con el NavController
+        // Obtener BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        // Configurar navegación automática con el BottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
-        // Asocia el BottomNavigationView con el NavController
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navInicio -> {
-                    navController.navigate(R.id.homeFragment) // Navega al fragmento de Inicio
-                    true
-                }
-                R.id.navPerfil -> {
-                    navController.navigate(R.id.profileFragment) // Navega al fragmento de Perfil
-                    true
-                }
-                else -> false
-            }
+        // Sincronizar visualmente el item seleccionado incluso al usar "back"
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            bottomNavigationView.menu.findItem(destination.id)?.isChecked = true
         }
     }
 }
+
 

@@ -2,11 +2,11 @@ package com.example.vconexionsas.home.perfil
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.*
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -18,52 +18,89 @@ class PerfilFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflar el layout para este fragmento
+    ): View {
         val rootView = inflater.inflate(R.layout.fragment_perfil, container, false)
 
-        // Obtener los datos del usuario desde SharedPreferences
-        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val nombre = sharedPreferences.getString("nombre_usuario", "Usuario desconocido") // Valor por defecto
-        val correo = sharedPreferences.getString("correo_usuario", "correo@ejemplo.com") // Valor por defecto
-
-        // Referencias a los TextViews donde se mostrarán los datos
+        // Referencias a vistas
         val nombreTextView: TextView = rootView.findViewById(R.id.nombreUsuario)
         val correoTextView: TextView = rootView.findViewById(R.id.emailUsuario)
+        val avatarImageView: ImageView = rootView.findViewById(R.id.avatar)
+        val avatarLoading: ProgressBar = rootView.findViewById(R.id.avatarLoading)
         val btnCerrarSesion: Button = rootView.findViewById(R.id.btn_logout)
 
-        // Asignar los datos a los TextViews
+        avatarImageView.setImageResource(R.drawable.ic_person)
+        avatarLoading.visibility = View.VISIBLE
+
+        // SharedPreferences
+        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val perfilPrefs = requireActivity().getSharedPreferences("perfil_usuario", Context.MODE_PRIVATE)
+
+        val nombre = perfilPrefs.getString("nombre", sharedPreferences.getString("nombre_usuario", "Usuario desconocido"))
+        val correo = sharedPreferences.getString("correo_usuario", "correo@ejemplo.com")
+        val imagenBase64 = perfilPrefs.getString("imagen", null)
+
         nombreTextView.text = nombre
         correoTextView.text = correo
 
+        avatarImageView.post {
+            if (!imagenBase64.isNullOrEmpty()) {
+                try {
+                    val imageBytes = Base64.decode(imagenBase64, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                    avatarImageView.setImageBitmap(bitmap)
+                } catch (_: Exception) {
+                    avatarImageView.setImageResource(R.drawable.ic_person)
+                }
+            }
+            avatarLoading.visibility = View.GONE
+        }
+
         btnCerrarSesion.setOnClickListener {
             sharedPreferences.edit().clear().apply()
-
             Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-
-            requireActivity().finish() // Finaliza actividad actual
+            startActivity(Intent(requireContext(), MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+            requireActivity().finish()
         }
 
-        // Dentro del onCreateView, después de inflar rootView:
-        val btnNotificaciones: Button = rootView.findViewById(R.id.btnNotificaciones)
-        btnNotificaciones.setOnClickListener {
+        rootView.findViewById<Button>(R.id.btnNotificaciones).setOnClickListener {
             findNavController().navigate(R.id.action_perfilFragment_to_notificacionesFragment)
-
         }
-        val privacy_policy_button: Button = rootView.findViewById(R.id.privacy_policy_button)
-        privacy_policy_button.setOnClickListener {
+
+        rootView.findViewById<Button>(R.id.privacy_policy_button).setOnClickListener {
             findNavController().navigate(R.id.action_perfilFragment_to_politicasFragment)
-
         }
-        // Manejo del botón Atrás del sistema para volver al fragmento anterior
+
+        rootView.findViewById<Button>(R.id.configure_profile_button).setOnClickListener {
+            findNavController().navigate(R.id.action_perfilFragment_to_configFragment)
+        }
+
+        parentFragmentManager.setFragmentResultListener("perfil_actualizado", viewLifecycleOwner) { _, _ ->
+            Toast.makeText(requireContext(), "Cambios guardados con éxito", Toast.LENGTH_SHORT).show()
+            val nuevosDatos = requireActivity().getSharedPreferences("perfil_usuario", Context.MODE_PRIVATE)
+            val nuevoNombre = nuevosDatos.getString("nombre", nombre)
+            val nuevaImagen = nuevosDatos.getString("imagen", imagenBase64)
+
+            nombreTextView.text = nuevoNombre
+            if (!nuevaImagen.isNullOrEmpty()) {
+                try {
+                    val imageBytes = Base64.decode(nuevaImagen, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                    avatarImageView.setImageBitmap(bitmap)
+                } catch (_: Exception) {
+                    avatarImageView.setImageResource(R.drawable.ic_person)
+                }
+            }
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            parentFragmentManager.popBackStack()
+            findNavController().popBackStack()
+
         }
 
         return rootView
     }
 }
+
+

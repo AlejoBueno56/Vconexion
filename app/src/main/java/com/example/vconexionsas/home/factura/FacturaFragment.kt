@@ -88,7 +88,7 @@ class FacturaFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
         }
 
-        val url = "http://192.168.115.118/api_pdf_factura.php?codigo_usuario=$codigoUsuario"
+        val url = "http://192.168.115.118/api_factura.php?codigo_usuario=$codigoUsuario"
 
         val request = Request.Builder()
             .url(url)
