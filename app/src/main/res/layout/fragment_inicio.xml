@@ -18,6 +18,7 @@
 
         <!-- Card de Promociones -->
 
+
         <TextView
             android:id="@+id/titulo"
             android:layout_width="wrap_content"
@@ -30,11 +31,10 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-
         <GridLayout
             android:id="@+id/menuGrid"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="411dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:alignmentMode="alignMargins"
@@ -140,7 +140,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="Icono planes"
-                        android:src="@drawable/ic_planes"
+                        android:src="@drawable/ic_plan"
                         app:tint="#265caf" />
 
                     <TextView
@@ -214,7 +214,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="Icono contraseña"
-                        android:src="@drawable/ic_wifi"
+                        android:src="@drawable/ic_cambiopassword"
                         app:tint="#265caf" />
 
                     <TextView
@@ -260,6 +260,117 @@
                         android:layout_marginTop="6dp"
                         android:gravity="center"
                         android:text="Conócenos"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Linea Comercial -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/LineaComercialCard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="55dp"
+                        android:contentDescription="Icono Linea Comercial"
+                        android:src="@drawable/ic_comercial"
+                        app:tint="#265caf" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Linea Comercial"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            }
+
+            <!-- Soporte Tecnico -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/SoporteTecnicoCard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Icono servicios"
+                        android:src="@drawable/ic_servicios"
+                        app:tint="#265caf" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="PQR"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!--Linea de Facturacion-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/LineaFacturacionCard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="Icono servicios"
+                        android:src="@drawable/ic_linefactura"
+                        app:tint="#265caf" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Linea Facturación"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
