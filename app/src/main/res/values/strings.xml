@@ -72,4 +72,13 @@
     <string name="recordatorio_factura">Recuerda: Debes mandar tu comprobante de transferencia al área de facturación para evitar un posible corte</string>
     <string name="enviar_comprobante">Enviar comprobante de pago por WhatsApp</string>
 
+    <string-array name="motivos_pqr">
+        <item>Tengo un indicador en rojo</item>
+        <item>No encienden los LEDs</item>
+        <item>No conecta el WiFi</item>
+        <item>Conexión sin acceso a Internet</item>
+        <item>No aparece la red</item>
+        <item>Otros (especificar)</item>
+    </string-array>
+
 </resources>

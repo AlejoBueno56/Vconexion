@@ -1,10 +1,14 @@
 package com.example.vconexionsas.home.inicio
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.vconexionsas.R
@@ -50,13 +54,34 @@ class InicioFragment : Fragment() {
             navController.navigate(R.id.action_home_to_factura)
         }
         view.findViewById<MaterialCardView>(R.id.cambioClaveCard).setOnClickListener {
-            navController.navigate(R.id.action_home_to_contrasena)
+            navController.navigate(R.id.action_contrasenaFragment_to_fragmentPruebaDetectarONU)
         }
         view.findViewById<MaterialCardView>(R.id.conocenosCard).setOnClickListener {
             navController.navigate(R.id.action_home_to_conocenos)
         }
+        view.findViewById<MaterialCardView>(R.id.SoporteTecnicoCard).setOnClickListener {
+            navController.navigate(R.id.action_home_to_pqr)
+        }
+
+        view.findViewById<MaterialCardView>(R.id.LineaComercialCard).setOnClickListener {
+            abrirChatWhatsapp(requireContext(), "+573024538585")
+        }
+
+        view.findViewById<MaterialCardView>(R.id.LineaFacturacionCard).setOnClickListener {
+            abrirChatWhatsapp(requireContext(), "+573164116348")
+        }
 
         return view
+    }
+
+    private fun abrirChatWhatsapp(context: Context, numero: String) {
+        val url = "https://wa.me/${numero.replace("+", "")}"
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "No se pudo abrir WhatsApp", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun escucharCambiosPromocion() {
@@ -98,6 +123,7 @@ class InicioFragment : Fragment() {
             }
     }
 }
+
 
 
 

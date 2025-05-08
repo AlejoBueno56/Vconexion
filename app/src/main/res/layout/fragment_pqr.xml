@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Botón atrás en una fila separada -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back"
+                android:contentDescription="Volver"
+                app:tint="#265CAF" />
+        </FrameLayout>
+
+        <!-- Título debajo del botón -->
+        <TextView
+            android:id="@+id/textTituloPQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formulario de PQR"
+            android:textColor="#265CAF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/textNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre: "
+            android:textColor="#333"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/textCodigoUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código: "
+            android:textColor="#333"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Motivo"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editMotivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe el motivo aquí"
+            android:background="@android:drawable/edit_text"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalles del problema"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecciona un detalle"
+            android:background="@android:drawable/edit_text"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editOtroDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Especifica el detalle aquí"
+            android:background="@android:drawable/edit_text"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnEnviarWhatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enviar por WhatsApp"
+            android:textColor="#fff"
+            android:backgroundTint="#265CAF"
+            android:padding="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

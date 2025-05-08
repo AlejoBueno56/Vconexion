@@ -95,7 +95,7 @@ class FacturaFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
         }
 
-        val url = "http://192.168.115.118/api_factura.php?codigo_usuario=$codigoUsuario"
+        val url = "https://loginc.vconexion.com/apipag.php?codigo_usuario=$codigoUsuario"
 
         val request = Request.Builder()
             .url(url)
@@ -174,7 +174,7 @@ class FacturaFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
         }
 
-        val baseUrl = "http://192.168.115.118/api_get_last_invoice.php"
+        val baseUrl = "https://loginc.vconexion.com/api_fact.php"
         val token = "Bearer vconexion2025"
 
         val urlBuilder = StringBuilder("$baseUrl?codigo_usuario=$codigoUsuario")
