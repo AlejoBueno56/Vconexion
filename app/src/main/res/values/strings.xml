@@ -64,5 +64,12 @@
     <string name="guardar_cambios">Guardar Cambios</string>
     <string name="hint_nombre">Nombre</string>
     <string name="imagen_perfil">Imagen de perfil del usuario</string>
+    <string name="sesion_pagos_title">Sesión de Pagos</string>
+    <string name="qr_code">Código QR para transferencia</string>
+    <string name="cuenta_bancaria">Cuenta Bancaria</string>
+    <string name="info_banco">47600000740 - Ahorros - Bancolombia\nNIT 901398501\nVConexion SAS</string>
+    <string name="warning_icon">Advertencia</string>
+    <string name="recordatorio_factura">Recuerda: Debes mandar tu comprobante de transferencia al área de facturación para evitar un posible corte</string>
+    <string name="enviar_comprobante">Enviar comprobante de pago por WhatsApp</string>
 
 </resources>

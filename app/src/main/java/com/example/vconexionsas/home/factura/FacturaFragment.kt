@@ -13,6 +13,8 @@ import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.vconexionsas.R
 import com.example.vconexionsas.databinding.FragmentFacturaBinding
 import okhttp3.*
 import okio.buffer
@@ -69,6 +71,11 @@ class FacturaFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             parentFragmentManager.popBackStack()
         }
+
+        binding.pagoPlanButton.setOnClickListener {
+            findNavController().navigate(R.id.action_actualFragment_to_sesionPagosFragment)
+        }
+
 
         return binding.root
     }
