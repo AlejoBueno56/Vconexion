@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         callback: (Boolean) -> Unit
     ) {
         val client = OkHttpClient()
-        val url = "http://192.168.115.118/apiclient.php"
+        val url = "https://loginc.vconexion.com/apiclient.php"
 
         val json = JSONObject().apply {
             put("cedula", cedula)

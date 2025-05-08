@@ -90,7 +90,12 @@
     <fragment android:id="@+id/ztecFragment" android:name="com.example.vconexionsas.home.contrasena.onus.ZteCFragment" android:label="ZteC" />
     <fragment android:id="@+id/sesionPagosFragment" android:name="com.example.vconexionsas.home.factura.SesionPagosFragment" android:label="Sesión de Pagos" tools:layout="@layout/fragment_sesion_pagos" />
     <action android:id="@+id/action_actualFragment_to_sesionPagosFragment" app:destination="@id/sesionPagosFragment" />
+    <fragment android:id="@+id/fragmentPruebaDetectarONU" android:name="com.example.vconexionsas.home.contrasena.FragmentPruebaDetectarONU" android:label="Detectar Modelo ONU" tools:layout="@layout/fragment_detectar_modelo_onu" />
 
+    <!-- Acción de navegación (por ejemplo desde FacturaFragment) -->
+    <action android:id="@+id/action_contrasenaFragment_to_fragmentPruebaDetectarONU" app:destination="@id/fragmentPruebaDetectarONU" />
 
+    <fragment android:id="@+id/pqrFragment" android:name="com.example.vconexionsas.home.pqr.PqrFragment" android:label="PQR" tools:layout="@layout/fragment_pqr"></fragment>
+    <action android:id="@+id/action_home_to_pqr" app:destination="@+id/pqrFragment"> </action>
 
 </navigation>
