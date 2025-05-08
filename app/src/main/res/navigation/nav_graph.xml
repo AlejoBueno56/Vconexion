@@ -88,8 +88,8 @@
     <fragment android:id="@+id/laticFragment" android:name="com.example.vconexionsas.home.contrasena.onus.LaticFragment" android:label="Latic" />
     <fragment android:id="@+id/zkxxFragment" android:name="com.example.vconexionsas.home.contrasena.onus.ZkxxFragment" android:label="ZKXX" />
     <fragment android:id="@+id/ztecFragment" android:name="com.example.vconexionsas.home.contrasena.onus.ZteCFragment" android:label="ZteC" />
-
-
+    <fragment android:id="@+id/sesionPagosFragment" android:name="com.example.vconexionsas.home.factura.SesionPagosFragment" android:label="Sesión de Pagos" tools:layout="@layout/fragment_sesion_pagos" />
+    <action android:id="@+id/action_actualFragment_to_sesionPagosFragment" app:destination="@id/sesionPagosFragment" />
 
 
 

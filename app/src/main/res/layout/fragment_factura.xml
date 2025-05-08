@@ -28,7 +28,7 @@
             android:id="@+id/facturaTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
+            android:layout_marginTop="140dp"
             android:text="Fecha de Pago"
             android:textColor="#265caf"
             android:textSize="26sp"
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="88dp"
+            android:layout_marginTop="48dp"
             android:layout_marginRight="16dp"
             android:backgroundTint="#ffffff"
             android:text="Descargar tu factura"
@@ -136,6 +136,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descargarFacturaButton" />
+
+        <Button
+            android:id="@+id/pagoPlanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="#ffffff"
+            android:text="Realiza tu pago"
+            android:textColor="#265caf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detalleUltimaFacturaButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
