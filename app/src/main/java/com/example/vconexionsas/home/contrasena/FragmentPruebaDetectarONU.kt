@@ -73,30 +73,29 @@ class FragmentPruebaDetectarONU : Fragment() {
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                view?.title?.let { titulo ->
-                    val modelo = identificarModeloDesdeTitulo(titulo)
-                    modeloDetectado = modelo
-                    modeloText.text = "Modelo detectado por Web: $modelo"
-                    Log.d("DETECTAR_ONU", "Detectado por Web: $modelo (título: $titulo)")
-                    mostrarCredencialesCompose()
-                }
+                val titulo = view?.title ?: "Sin título"
+                val modelo = identificarModeloDesdeTitulo(titulo, url)
+                modeloDetectado = modelo
+                modeloText.text = "Modelo detectado por Web: $modelo"
+                mostrarCredencialesCompose()
+                Log.d("DETECTAR_ONU", "Detectado por Web: $modelo (título: $titulo, url: $url)")
             }
         }
         webView.loadUrl("http://$gatewayIp")
     }
 
-    private fun identificarModeloDesdeTitulo(titulo: String): String {
+    private fun identificarModeloDesdeTitulo(titulo: String, url: String?): String {
         return when {
             titulo.contains("ZTE", ignoreCase = true) -> "ZTE"
             titulo.contains("Huawei", ignoreCase = true) -> "Huawei"
             titulo.contains("Fiberhome", ignoreCase = true) -> "Fiberhome"
             titulo.contains("ADC", ignoreCase = true) -> "ADC"
-            titulo.contains("EASY4", ignoreCase = true) -> "EASY4link"
+            titulo.contains("EASY4", ignoreCase = true) -> "EASY4Link"
             titulo.contains("TP-Link", ignoreCase = true) -> "TPLINK"
-            titulo.contains("LATIC", ignoreCase = true) -> "LATIC"
-            titulo.contains("ZC", ignoreCase = true) -> "ZC"
+            titulo.contains("ZKXX", ignoreCase = true) -> "ZC"
             titulo.contains("ZTE_China", ignoreCase = true) -> "ZTE_China"
-            else -> "Desconocido ($titulo)"
+            url?.contains("login.asp", ignoreCase = true) == true -> "LATIC" // para detección por URL
+            else -> "Desconocido ($url)"
         }
     }
 

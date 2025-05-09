@@ -1,4 +1,5 @@
 <resources>
+    <!--Nombre APP-->
     <string name="app_name">VCUsuarios</string>
     <string name="logo_desc">Logo de la aplicación</string>
     <string name="bienvenido">Bienvenido</string>
@@ -10,17 +11,47 @@
     <string name="no_tienes_cuenta">¿No tienes una cuenta?</string>
     <string name="registrarse">Regístrate aquí</string>
     <string name="back_button">Atrás</string>
-    <!-- Título del menú principal -->
-    <string name="menu_principal_titulo">Menú Principal</string>
 
-    <!-- Opciones del menú principal -->
-    <string name="menu_factura">Factura</string>
-    <string name="menu_speedtest">Speedtest</string>
-    <string name="menu_planes">Planes</string>
-    <string name="menu_servicios">Nuestros Servicios</string>
+    <!-- Títulos generales -->
+    <string name="menu">Menú</string>
 
-    <!-- Texto para el botón flotante -->
-    <string name="fab_chat_description">Chat</string>
+    <!-- Menú principal -->
+    <string name="factura">Factura</string>
+    <string name="speedtest">Speedtest</string>
+    <string name="planes">Planes</string>
+    <string name="servicios">Servicios</string>
+    <string name="cambio_contrasena">Cambio Contraseña</string>
+    <string name="conocenos">Conócenos</string>
+    <string name="linea_comercial">Línea Comercial</string>
+    <string name="pqr">PQR</string>
+    <string name="linea_facturacion">Línea Facturación</string>
+
+    <!-- Accesibilidad para iconos -->
+    <string name="desc_icono_factura">Icono factura</string>
+    <string name="desc_icono_speedtest">Icono speedtest</string>
+    <string name="desc_icono_planes">Icono planes</string>
+    <string name="desc_icono_servicios">Icono servicios</string>
+    <string name="desc_icono_contrasena">Icono contraseña</string>
+    <string name="desc_icono_conocenos">Icono conocenos</string>
+    <string name="desc_icono_linea_comercial">Icono línea comercial</string>
+    <string name="desc_icono_pqr">Icono PQR</string>
+    <string name="desc_icono_linea_facturacion">Icono línea facturación</string>
+
+    <!-- Sección Promociones -->
+    <string name="promo_header">🎉 Promociones</string>
+    <string name="promo_titulo">Disfruta el año con nosotros</string>
+    <string name="promo_desc">¡Aprovecha un 25% de descuento en nuestro servicio de internet de alta velocidad! Conéctate con calidad y estabilidad para navegar, trabajar o entretenerte sin interrupciones.</string>
+
+  <!--pie de pagina-->
+    <string name="texto_institucional">
+    “En Vconexión, ofrecemos soluciones integrales de telecomunicaciones diseñadas para satisfacer las necesidades de nuestros clientes con la máxima eficiencia y confiabilidad. Nuestros servicios se destacan por su tecnología de vanguardia, que garantiza conexiones rápidas y seguras, junto con un equipo de soporte altamente capacitado, disponible para brindar asistencia en cualquier momento.”
+</string>
+
+    <string name="fundador_nombre">Carlos Martínez</string>
+    <string name="fundador_cargo">Fundador</string>
+    <string name="logo_empresa_desc">Logotipo de Vconexión</string>
+    <string name="pie_derechos">VconexiónSAS © 2025. Todos los derechos reservados.</string>
+    <string name="version_app">Versión 1.0</string>
 
     <!-- Etiquetas de navegación inferior -->
     <string name="nav_inicio">Inicio</string>
@@ -71,6 +102,8 @@
     <string name="warning_icon">Advertencia</string>
     <string name="recordatorio_factura">Recuerda: Debes mandar tu comprobante de transferencia al área de facturación para evitar un posible corte</string>
     <string name="enviar_comprobante">Enviar comprobante de pago por WhatsApp</string>
+
+
 
     <string-array name="motivos_pqr">
         <item>Tengo un indicador en rojo</item>

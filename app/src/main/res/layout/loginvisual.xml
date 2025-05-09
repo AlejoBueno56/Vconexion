@@ -149,4 +149,40 @@
                 app:elevation="4dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <!-- Pie de página: derechos reservados -->
+
+    <!-- Pie de página: versión -->
+    <TextView
+        android:id="@+id/pie_derechos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:text="@string/pie_derechos"
+        android:textAlignment="center"
+        android:textColor="#AAAAAA"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_container" />
+
+    <TextView
+        android:id="@+id/version_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:text="@string/version_app"
+        android:textAlignment="center"
+        android:textColor="#AAAAAA"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pie_derechos"
+        app:layout_constraintVertical_bias="0.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

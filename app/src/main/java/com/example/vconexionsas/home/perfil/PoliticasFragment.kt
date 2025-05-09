@@ -1,12 +1,14 @@
 package com.example.vconexionsas.home.perfil
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.vconexionsas.databinding.FragmentPoliticasBinding
+import com.example.vconexionsas.R
 
 class PoliticasFragment : Fragment() {
 
@@ -18,18 +20,14 @@ class PoliticasFragment : Fragment() {
     ): View {
         binding = FragmentPoliticasBinding.inflate(inflater, container, false)
 
-        // Aquí puedes cargar texto dinámico si lo necesitas
-        binding.textoPoliticas.text = """
-            En VConexión respetamos y protegemos la privacidad de nuestros usuarios.
+        // Leer archivo con HTML formateado desde res/raw/politica.txt
+        val politicaHtml = resources.openRawResource(R.raw.politica)
+            .bufferedReader()
+            .use { it.readText() }
 
-            - No compartimos información personal con terceros.
-            - Usamos los datos únicamente para mejorar tu experiencia.
-            - Puedes solicitar la eliminación de tus datos cuando lo desees.
+        binding.textoPoliticas.text = Html.fromHtml(politicaHtml, Html.FROM_HTML_MODE_LEGACY)
 
-            Al usar esta aplicación, aceptas nuestras políticas.
-        """.trimIndent()
-
-        // Permitir volver con el botón físico
+        // Manejo del botón atrás
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             parentFragmentManager.popBackStack()
         }
@@ -37,3 +35,5 @@ class PoliticasFragment : Fragment() {
         return binding.root
     }
 }
+
+
