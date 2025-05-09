@@ -27,10 +27,11 @@
             android:id="@+id/textoPoliticas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#444444"
-            android:textSize="16sp"
+            android:text="Cargando..."
+            android:textColor="#333333"
+            android:textSize="14sp"
             android:lineSpacingExtra="6dp"
-            android:text="Aquí irán las políticas de privacidad de la aplicación..." />
-
+            android:fontFamily="sans-serif"
+            android:paddingBottom="24dp" />
     </LinearLayout>
 </ScrollView>

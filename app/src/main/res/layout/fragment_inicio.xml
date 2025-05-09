@@ -11,14 +11,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-
-        <!-- Título -->
-
-        <!-- Grid con las opciones -->
-
-        <!-- Card de Promociones -->
-
-
         <TextView
             android:id="@+id/titulo"
             android:layout_width="wrap_content"
@@ -26,7 +18,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="16dp"
-            android:text="Menú"
+            android:text="@string/menu"
             android:textColor="#265caf"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -39,11 +31,12 @@
             android:layout_marginBottom="16dp"
             android:alignmentMode="alignMargins"
             android:columnCount="3"
-            android:rowCount="2"
             android:rowOrderPreserved="false"
             android:useDefaultMargins="true">
 
-            <!-- FACTURA -->
+            <!-- Tarjetas del menú -->
+            <!-- Las siguientes tarjetas están replicadas cambiando los valores de ID, texto y descripción -->
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/facturaCard"
                 android:layout_width="0dp"
@@ -65,8 +58,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono factura"
                         android:src="@drawable/ic_factura"
+                        android:contentDescription="@string/desc_icono_factura"
                         app:tint="#265caf" />
 
                     <TextView
@@ -74,13 +67,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Factura"
+                        android:text="@string/factura"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- SPEEDTEST -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/speedTestCard"
                 android:layout_width="0dp"
@@ -102,8 +94,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono Speedtest"
                         android:src="@drawable/ic_speedtest"
+                        android:contentDescription="@string/desc_icono_speedtest"
                         app:tint="#265caf" />
 
                     <TextView
@@ -111,13 +103,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Speedtest"
+                        android:text="@string/speedtest"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- PLANES -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/planesCard"
                 android:layout_width="0dp"
@@ -139,8 +130,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono planes"
                         android:src="@drawable/ic_plan"
+                        android:contentDescription="@string/desc_icono_planes"
                         app:tint="#265caf" />
 
                     <TextView
@@ -148,13 +139,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Planes"
+                        android:text="@string/planes"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- SERVICIOS -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/serviciosCard"
                 android:layout_width="0dp"
@@ -176,8 +166,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono servicios"
                         android:src="@drawable/ic_servicios"
+                        android:contentDescription="@string/desc_icono_servicios"
                         app:tint="#265caf" />
 
                     <TextView
@@ -185,13 +175,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Servicios"
+                        android:text="@string/servicios"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- CAMBIO CONTRASEÑA -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cambioClaveCard"
                 android:layout_width="0dp"
@@ -213,8 +202,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono contraseña"
                         android:src="@drawable/ic_cambiopassword"
+                        android:contentDescription="@string/desc_icono_contrasena"
                         app:tint="#265caf" />
 
                     <TextView
@@ -222,13 +211,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Cambio Contraseña"
+                        android:text="@string/cambio_contrasena"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- CONÓCENOS -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/conocenosCard"
                 android:layout_width="0dp"
@@ -250,8 +238,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono conocenos"
                         android:src="@drawable/ic_conocenos"
+                        android:contentDescription="@string/desc_icono_conocenos"
                         app:tint="#265caf" />
 
                     <TextView
@@ -259,13 +247,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Conócenos"
+                        android:text="@string/conocenos"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Linea Comercial -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/LineaComercialCard"
                 android:layout_width="0dp"
@@ -287,8 +274,8 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="55dp"
-                        android:contentDescription="Icono Linea Comercial"
                         android:src="@drawable/ic_comercial"
+                        android:contentDescription="@string/desc_icono_linea_comercial"
                         app:tint="#265caf" />
 
                     <TextView
@@ -296,14 +283,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Linea Comercial"
+                        android:text="@string/linea_comercial"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-            }
 
-            <!-- Soporte Tecnico -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/SoporteTecnicoCard"
                 android:layout_width="0dp"
@@ -325,8 +310,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono servicios"
                         android:src="@drawable/ic_servicios"
+                        android:contentDescription="@string/desc_icono_pqr"
                         app:tint="#265caf" />
 
                     <TextView
@@ -334,12 +319,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="PQR"
+                        android:text="@string/pqr"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-            <!--Linea de Facturacion-->
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/LineaFacturacionCard"
                 android:layout_width="0dp"
@@ -361,8 +346,8 @@
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:contentDescription="Icono servicios"
                         android:src="@drawable/ic_linefactura"
+                        android:contentDescription="@string/desc_icono_linea_facturacion"
                         app:tint="#265caf" />
 
                     <TextView
@@ -370,11 +355,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Linea Facturación"
+                        android:text="@string/linea_facturacion"
                         android:textColor="#333333"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
         </GridLayout>
 
         <com.google.android.material.card.MaterialCardView
@@ -386,7 +372,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="389dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -395,7 +381,7 @@
                     android:id="@+id/textoTituloPromoHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🎉 Promociones"
+                    android:text="@string/promo_header"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -405,7 +391,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Disfruta el año con nosotros"
+                    android:text="@string/promo_titulo"
                     android:textColor="#265caf"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -415,7 +401,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="¡Aprovecha un 25% de descuento en nuestro servicio de internet de alta velocidad! Conéctate con calidad y estabilidad para navegar, trabajar o entretenerte sin interrupciones."
+                    android:text="@string/promo_desc"
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
@@ -426,8 +412,106 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/rounded_image_background"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_promocion" />
+                    android:src="@drawable/ic_promocion"
+                    android:contentDescription="@null" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center_horizontal">
+
+                <!-- Texto institucional centrado -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_institucional"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="6dp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="italic" />
+
+                <!-- Foto, nombre y cargo -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/logoazul"
+                        android:scaleType="centerCrop"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/circle_border"
+                        android:padding="2dp"
+                        android:clipToOutline="true"
+                        android:contentDescription="@string/logo_empresa_desc" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fundador_nombre"
+                            android:textStyle="bold"
+                            android:textColor="#265caf"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fundador_cargo"
+                            android:textColor="#666666"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Pie de página -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/pie_derechos"
+            android:textColor="#020000"
+            android:textSize="11sp"
+            android:textAlignment="center"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/version_app"
+            android:textColor="#020000"
+            android:textSize="11sp"
+            android:textAlignment="center"
+            android:gravity="center" />
+
+
     </LinearLayout>
 </ScrollView>
+
