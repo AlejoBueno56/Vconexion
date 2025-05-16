@@ -24,7 +24,7 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
 
     val cred = when (modelo) {
         "ADC" -> arrayOf("admin", "admin", "username", "password", "byId")
-        "EASY4link" -> arrayOf("superadmin", "super1234", "username", "password", "byId")
+        "EASY4link" -> arrayOf("admin", "1234", "username", "password", "byId")
         "LATIC" -> arrayOf("admin", "admin", "username", "password", "byName")
         "ZTE_China" -> arrayOf("admin", "admin", "Username", "Password", "byName")
         "ZC" -> arrayOf("user", "120o605u", "username", "password", "byId")

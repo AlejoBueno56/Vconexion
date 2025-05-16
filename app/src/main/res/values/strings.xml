@@ -4,7 +4,7 @@
     <string name="logo_desc">Logo de la aplicación</string>
     <string name="bienvenido">Bienvenido</string>
     <string name="login_subtitle">Ingrese sus credenciales para continuar</string>
-    <string name="usuario">Usuario</string>
+    <string name="usuario">Cedula</string>
     <string name="contrasena">Contraseña</string>
     <string name="olvide_contrasena">¿Olvidaste tu contraseña?</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
@@ -22,9 +22,11 @@
     <string name="servicios">Servicios</string>
     <string name="cambio_contrasena">Cambio Contraseña</string>
     <string name="conocenos">Conócenos</string>
-    <string name="linea_comercial">Línea Comercial</string>
+    <string name="linea_comercial">Habla Con Un Asesor</string>
     <string name="pqr">PQR</string>
     <string name="linea_facturacion">Línea Facturación</string>
+    <string name="traslado">Traslado</string>
+    <string name="cobertura">Cobertura</string>
 
     <!-- Accesibilidad para iconos -->
     <string name="desc_icono_factura">Icono factura</string>
@@ -36,6 +38,8 @@
     <string name="desc_icono_linea_comercial">Icono línea comercial</string>
     <string name="desc_icono_pqr">Icono PQR</string>
     <string name="desc_icono_linea_facturacion">Icono línea facturación</string>
+    <string name="desc_icono_traslado">Icono traslado</string>
+    <string name="desc_icono_cobertura">Icono cobertura</string>
 
     <!-- Sección Promociones -->
     <string name="promo_header">🎉 Promociones</string>
@@ -51,7 +55,7 @@
     <string name="fundador_cargo">Fundador</string>
     <string name="logo_empresa_desc">Logotipo de Vconexión</string>
     <string name="pie_derechos">VconexiónSAS © 2025. Todos los derechos reservados.</string>
-    <string name="version_app">Versión 1.0</string>
+    <string name="version_app">Versión 2.0.0</string>
 
     <!-- Etiquetas de navegación inferior -->
     <string name="nav_inicio">Inicio</string>
@@ -113,5 +117,18 @@
         <item>No aparece la red</item>
         <item>Otros (especificar)</item>
     </string-array>
+
+    <!-- Contraseña-->
+    <string name="titulo_wifi">¿Quieres cambiar la contraseña de tu Wi-Fi?</string>
+    <string name="subtitulo_wifi">Debes seguir los siguientes pasos:</string>
+    <string name="instrucciones_wifi">Paso 1: Selecciona tu modelo o detecta automáticamente.\nPaso 2: Sigue las instrucciones para cambiar la contraseña.</string>
+    <string name="texto_detectar">Detectar mi dispositivo automáticamente</string>
+    <string name="texto_manual">Si no se detecta tu ONU, puedes seleccionarlo manualmente:</string>
+    <string name="btn_contactar">¿No entendiste? Contáctanos y te asesoramos</string>
+    <string name="icono_detectar">Icono de detección</string>
+    <string name="icono_contacto">Icono de contacto</string>
+    <string name="menu_modelos">Modelos ONU disponibles ▼</string>
+    <string name="menu_modelos_abierto">Modelos ONU disponibles ▲</string>
+
 
 </resources>

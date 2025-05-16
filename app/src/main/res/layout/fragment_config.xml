@@ -1,98 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scrollViewConfig"
+    android:id="@+id/configRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8FA"
-    android:padding="24dp"
-    android:layout_marginTop="45dp">
+    android:background="#F7F8FA">
 
-    <LinearLayout
-        android:id="@+id/layoutConfig"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+    <!-- Botón de regreso -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/back_button"
+        app:tint="#265caf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="wrap_content"
+    <!-- Scroll principal -->
+    <ScrollView
+        android:id="@+id/scrollViewConfig"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="24dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layoutConfig"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/titulo_config"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#265CAF"
-            android:layout_marginBottom="24dp" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        <!-- Imagen con sombra y borde -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardImagePerfil"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="60dp"
-            app:cardElevation="6dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo_config"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#265CAF"
+                android:layout_marginBottom="24dp" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/circle_background">
+            <!-- Imagen con sombra y borde -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardImagePerfil"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="6dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
 
-                <ImageView
-                    android:id="@+id/imagePerfilEditar"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person"
-                    android:padding="2dp"
-                    android:contentDescription="@string/imagen_perfil"
-                    android:clickable="true"
-                    android:focusable="true" />
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
+                    android:background="@drawable/circle_background">
 
-        <TextView
-            android:id="@+id/textCambiarFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cambiar_foto"
-            android:textColor="#265CAF"
-            android:textSize="14sp"
-            android:layout_marginBottom="16dp" />
-        <TextView
-            android:id="@+id/labelNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cambio de nombre"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            android:paddingStart="4dp" />
+                    <ImageView
+                        android:id="@+id/imagePerfilEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_person"
+                        android:padding="2dp"
+                        android:contentDescription="@string/imagen_perfil"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/textCambiarFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cambiar_foto"
+                android:textColor="#265CAF"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
 
-        <EditText
-            android:id="@+id/editNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_nombre"
-            android:layout_marginTop="16dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:inputType="textPersonName"
-            android:importantForAutofill="yes" />
+            <TextView
+                android:id="@+id/labelNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cambio de nombre"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="4dp" />
 
-        <Button
-            android:id="@+id/btnGuardar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/guardar_cambios"
-            android:backgroundTint="#265CAF"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="24dp" />
-    </LinearLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/editNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_nombre"
+                android:layout_marginTop="16dp"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:inputType="textPersonName"
+                android:importantForAutofill="yes" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guardar_cambios"
+                android:backgroundTint="#265CAF"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="24dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

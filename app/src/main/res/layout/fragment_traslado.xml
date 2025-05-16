@@ -34,7 +34,7 @@
             android:id="@+id/textTituloPQR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Formulario de PQR"
+            android:text="Solicitud de Traslado"
             android:textColor="#265CAF"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -61,16 +61,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Motivo"
+            android:layout_marginBottom="8dp"
+            android:text="Nueva Dirección"
             android:textColor="#000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editMotivo"
+            android:id="@+id/editDireccionTraslado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escribe el motivo aquí"
+            android:hint="Escribe tu dirección de traslado aquí"
             android:background="@android:drawable/edit_text"
             android:inputType="text"
             android:padding="10dp"
@@ -78,47 +78,16 @@
             android:textColorHint="#888"
             android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Detalles del problema"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
-
-        <AutoCompleteTextView
-            android:id="@+id/autoDetalles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Selecciona un detalle"
-            android:background="@android:drawable/edit_text"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#888"
-            android:layout_marginBottom="8dp" />
-
-        <EditText
-            android:id="@+id/editOtroDetalle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Especifica el detalle aquí"
-            android:background="@android:drawable/edit_text"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#888"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone" />
 
         <Button
-            android:id="@+id/btnEnviarWhatsapp"
+            android:id="@+id/btnEnviarTraslado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar Reporte"
+            android:text="Solicitud de Traslado"
             android:textColor="#fff"
             android:backgroundTint="#265CAF"
             android:padding="14dp"
             android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
+

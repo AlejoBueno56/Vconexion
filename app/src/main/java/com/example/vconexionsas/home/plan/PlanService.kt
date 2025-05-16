@@ -12,7 +12,17 @@ fun obtenerPlanes(
     onSuccess: (List<PlanData>) -> Unit,
     onError: (() -> Unit)? = null
 ) {
-    val url = "https://loginc.vconexion.com/apipag.php?accion=listar_planes" // 🔁 reemplaza con tu URL real
+    val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+    val sede = prefs.getString("sede", "Chitaga")
+    val baseUrl = when (sede) {
+        "Pamplona" -> "https://login.vconexion.com/"
+        "Toledo" -> "https://logint.vconexion.com/"
+        "Chitaga" -> "https://loginc.vconexion.com/"
+        else -> "https://loginc.vconexion.com/"
+    }
+
+    val url = baseUrl + "apipag.php?accion=listar_planes"
+
     val queue = Volley.newRequestQueue(context)
 
     val request = JsonObjectRequest(

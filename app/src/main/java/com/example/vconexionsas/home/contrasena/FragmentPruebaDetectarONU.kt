@@ -93,7 +93,7 @@ class FragmentPruebaDetectarONU : Fragment() {
             titulo.contains("EASY4", ignoreCase = true) -> "EASY4Link"
             titulo.contains("TP-Link", ignoreCase = true) -> "TPLINK"
             titulo.contains("ZKXX", ignoreCase = true) -> "ZC"
-            titulo.contains("ZTE_China", ignoreCase = true) -> "ZTE_China"
+            titulo.contains("F663N", ignoreCase = true) -> "ZTE_China"
             url?.contains("login.asp", ignoreCase = true) == true -> "LATIC" // para detección por URL
             else -> "Desconocido ($url)"
         }

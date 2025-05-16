@@ -54,14 +54,15 @@
             <!-- Imagen principal -->
 
             <!-- Tarjeta: ¿Qué es IPTV? -->
+
             <ImageView
                 android:id="@+id/iptvImageSubtitle1"
-                android:layout_width="320dp"
-                android:layout_height="180dp"
+                android:layout_width="282dp"
+                android:layout_height="202dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_background"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_iptvtv" />
+                android:src="@drawable/ic_tvlatino" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

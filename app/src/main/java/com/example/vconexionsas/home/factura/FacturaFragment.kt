@@ -64,6 +64,7 @@ class FacturaFragment : Fragment() {
             }
             bottomSheet.show(parentFragmentManager, "FiltroFactura")
         }
+
         binding.backButton.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
@@ -76,8 +77,19 @@ class FacturaFragment : Fragment() {
             findNavController().navigate(R.id.action_actualFragment_to_sesionPagosFragment)
         }
 
-
         return binding.root
+    }
+
+    private fun obtenerBaseUrlPorSede(): String {
+        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val sede = prefs.getString("sede", "Chitaga")
+
+        return when (sede) {
+            "Pamplona" -> "https://login.vconexion.com/"
+            "Toledo" -> "https://logint.vconexion.com/"
+            "Chitaga" -> "https://loginc.vconexion.com/"
+            else -> "https://loginc.vconexion.com/"
+        }
     }
 
     private fun obtenerFactura() {
@@ -95,7 +107,7 @@ class FacturaFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
         }
 
-        val url = "https://loginc.vconexion.com/apipag.php?codigo_usuario=$codigoUsuario"
+        val url = obtenerBaseUrlPorSede() + "apipag.php?codigo_usuario=$codigoUsuario"
 
         val request = Request.Builder()
             .url(url)
@@ -162,7 +174,6 @@ class FacturaFragment : Fragment() {
         })
     }
 
-
     private fun obtenerUrlFacturaSegura(
         codigoUsuario: String,
         mes: String? = null,
@@ -174,7 +185,7 @@ class FacturaFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
         }
 
-        val baseUrl = "https://loginc.vconexion.com/api_fact.php"
+        val baseUrl = obtenerBaseUrlPorSede() + "api_fact.php"
         val token = "Bearer vconexion2025"
 
         val urlBuilder = StringBuilder("$baseUrl?codigo_usuario=$codigoUsuario")
@@ -284,7 +295,6 @@ class FacturaFragment : Fragment() {
 
                 activity?.runOnUiThread {
                     binding.progressBar.visibility = View.GONE
-
                     Toast.makeText(context, "Factura guardada en: ${file.absolutePath}", Toast.LENGTH_LONG).show()
 
                     val uri = FileProvider.getUriForFile(

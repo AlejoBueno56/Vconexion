@@ -6,11 +6,11 @@
     android:background="#F5F7FA">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/perfilContentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Título -->
         <TextView
             android:id="@+id/tituloPerfil"
             android:layout_width="wrap_content"
@@ -24,7 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Avatar con borde azul y sombra -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAvatar"
             android:layout_width="100dp"
@@ -52,7 +51,6 @@
                     android:padding="2dp"
                     android:contentDescription="@string/imagen_perfil" />
 
-                <!-- Indicador de carga -->
                 <ProgressBar
                     android:id="@+id/avatarLoading"
                     android:layout_width="32dp"
@@ -62,7 +60,6 @@
             </FrameLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Nombre -->
         <TextView
             android:id="@+id/nombreUsuario"
             android:layout_width="wrap_content"
@@ -76,7 +73,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Email -->
         <TextView
             android:id="@+id/emailUsuario"
             android:layout_width="wrap_content"
@@ -89,7 +85,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Card de opciones -->
         <androidx.cardview.widget.CardView
             android:id="@+id/opcionesCard"
             android:layout_width="0dp"
@@ -147,7 +142,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Botón Cerrar Sesión -->
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="190dp"

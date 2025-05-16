@@ -23,10 +23,13 @@ class FacturaFiltroBottomSheet(
         binding = DialogFiltroFacturaBinding.inflate(inflater, container, false)
 
         val meses = listOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-        val anios = listOf("2024", "2025") // puedes automatizar si deseas
+        val currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
+        val anios = (currentYear downTo currentYear - 4).map { it.toString() }
 
-        binding.spinnerMes.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, meses)
-        binding.spinnerAnio.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, anios)
+        binding.spinnerMes.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, meses)
+        binding.spinnerAnio.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, anios)
 
         binding.btnBuscarFactura.setOnClickListener {
             val mes = binding.spinnerMes.selectedItem.toString()
