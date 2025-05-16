@@ -7,10 +7,15 @@ Aplicación móvil oficial para clientes de **VConexionSAS**, desarrollada en An
 ## 🚀 Funcionalidades principales
 
 - Inicio de sesión seguro con validación por API
-- Visualización de reportes técnicos: instalación, retiro y traslado
-- Descarga y visualización de factura mensual en PDF
+- Autenticación por cédula y contraseña
+- Consulta de facturación
+- Descarga y envío de facturas en PDF
+- Cambio de contraseña
+- Recuperación de acceso por correo con token
+- Notificaciones push con FCM
+- Gestión de perfil con imagen personalizada
+- Contacto directo vía WhatsApp según sede
 - Historial de facturación con filtro por mes y año
-- Exportación de reportes a PDF y Excel
 - Recepción de notificaciones en tiempo real vía Firebase
 
 ---
@@ -21,23 +26,25 @@ Aplicación móvil oficial para clientes de **VConexionSAS**, desarrollada en An
 - **Kotlin 2.0 + Gradle Kotlin DSL**
 - **Volley / Retrofit** para APIs
 - **Firebase Cloud Messaging (FCM)**
-- **PHP / Node.js** para backend
-- **TCPDF** (para PDF) y **Apache POI** (para Excel)
+- **PHP** para backend
+- **TCPDF** (para PDF)
 - **SharedPreferences** para sesión segura
 
 ---
 
 ## 📌 Historial de cambios
 
-Consulta el historial completo en el archivo [CHANGELOG.md](./CHANGELOG.md)
+Consulta el historial completo en el archivo [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## 🔐 Seguridad
 
-- Sesión persistente con token seguro (Bearer)
-- Encriptación de credenciales locales
-- Validación de identidad y protección contra accesos no autorizados
+- Uso de `EncryptedSharedPreferences` para almacenar de forma segura las credenciales del usuario (token, correo, cédula).
+- Autenticación mediante `Bearer Token` en todas las llamadas API sensibles (como facturación y recuperación de contraseña).
+- Envío cifrado de datos comocontraseñas usando HTTPS.
+- Gestión de sesiones persistentes con expiración automática del token.
+
 
 ---
 

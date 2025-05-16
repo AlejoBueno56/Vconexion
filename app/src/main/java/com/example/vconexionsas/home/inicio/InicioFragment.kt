@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.vconexionsas.R
+import com.example.vconexionsas.utils.ContactoUtils
+import com.example.vconexionsas.utils.VersionUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -29,7 +31,6 @@ class InicioFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_inicio, container, false)
 
-        // Referencias a los elementos de promoción
         tituloPromo = view.findViewById(R.id.textoTituloPromo)
         descripcionPromo = view.findViewById(R.id.textoDescripcionPromo)
         imagenPromo = view.findViewById(R.id.imagenPromocion)
@@ -53,29 +54,48 @@ class InicioFragment : Fragment() {
         view.findViewById<MaterialCardView>(R.id.facturaCard).setOnClickListener {
             navController.navigate(R.id.action_home_to_factura)
         }
+
         view.findViewById<MaterialCardView>(R.id.cambioClaveCard).setOnClickListener {
-            navController.navigate(R.id.action_contrasenaFragment_to_fragmentPruebaDetectarONU)
+            navController.navigate(R.id.action_home_to_contrasena)
         }
+
         view.findViewById<MaterialCardView>(R.id.conocenosCard).setOnClickListener {
             navController.navigate(R.id.action_home_to_conocenos)
         }
+
         view.findViewById<MaterialCardView>(R.id.SoporteTecnicoCard).setOnClickListener {
             navController.navigate(R.id.action_home_to_pqr)
         }
 
         view.findViewById<MaterialCardView>(R.id.LineaComercialCard).setOnClickListener {
-            abrirChatWhatsapp(requireContext(), "+573024538585")
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.COMERCIAL)
+            abrirChatWhatsapp(requireContext(), numero)
         }
 
         view.findViewById<MaterialCardView>(R.id.LineaFacturacionCard).setOnClickListener {
-            abrirChatWhatsapp(requireContext(), "+573164116348")
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.FACTURACION)
+            abrirChatWhatsapp(requireContext(), numero)
         }
+        view.findViewById<MaterialCardView>(R.id.trasladoCard).setOnClickListener {
+            navController.navigate(R.id.action_home_to_traslado)
+        }
+        view.findViewById<MaterialCardView>(R.id.coberturaCard).setOnClickListener {
+            navController.navigate(R.id.action_home_to_cobertura)
+        }
+
+        val container = view.findViewById<View>(R.id.inicioContainer)
+        container.alpha = 0f
+        container.animate().alpha(1f).setDuration(400).start()
+
+        val version = VersionUtils.getAppVersion(requireContext())
+        val versionTextView = view.findViewById<TextView>(R.id.textVersion)
+        versionTextView.text = "Versión: $version"
 
         return view
     }
 
     private fun abrirChatWhatsapp(context: Context, numero: String) {
-        val url = "https://wa.me/${numero.replace("+", "")}"
+        val url = "https://wa.me/${numero.replace("+", "")}" // Asegura formato sin el "+"
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             context.startActivity(intent)
@@ -85,15 +105,25 @@ class InicioFragment : Fragment() {
     }
 
     private fun escucharCambiosPromocion() {
-        db.collection("promociones").document("promo_actual")
+        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val sede = prefs.getString("sede", "Chitaga") ?: "Chitaga"
+
+        // Mapeo entre sede y documento en Firestore
+        val documentoPromocion = when (sede.lowercase()) {
+            "pamplona" -> "promo_pamplona"
+            "toledo" -> "promo_toledo"
+            else -> "promo_actual" // Chitaga u otra sede por defecto
+        }
+
+        db.collection("promociones").document(documentoPromocion)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e("Firestore", "❌ Error al obtener promoción: ${error.message}")
+                    Log.e("Firestore", "❌ Error al obtener promoción para $sede: ${error.message}")
                     return@addSnapshotListener
                 }
 
                 if (snapshot == null || !snapshot.exists()) {
-                    Log.w("Firestore", "⚠️ Documento 'promo_actual' no existe o está vacío.")
+                    Log.w("Firestore", "⚠️ Documento $documentoPromocion no existe o está vacío.")
                     return@addSnapshotListener
                 }
 
@@ -101,7 +131,7 @@ class InicioFragment : Fragment() {
                 val descripcion = snapshot.getString("descripcion") ?: ""
                 val imagenUrl = snapshot.getString("imagenUrl") ?: ""
 
-                Log.d("Firestore", "📦 Promo recibida: titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl")
+                Log.d("Firestore", "📦 Promo ($sede): titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl")
 
                 tituloPromo.text = titulo
                 descripcionPromo.text = descripcion
@@ -122,7 +152,9 @@ class InicioFragment : Fragment() {
                 }
             }
     }
+
 }
+
 
 
 

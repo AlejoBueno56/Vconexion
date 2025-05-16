@@ -37,7 +37,17 @@ class OlvideContrasenaActivity : AppCompatActivity() {
     private fun enviarToken(correo: String) {
         binding.progressBar.visibility = View.VISIBLE
 
-        val url = "http://192.168.115.118/api_enviar_token.php"
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val sede = prefs.getString("sede", "Chitaga")
+        val baseUrl = when (sede) {
+            "Pamplona" -> "https://login.vconexion.com/"
+            "Toledo" -> "https://logint.vconexion.com/"
+            "Chitaga" -> "https://loginc.vconexion.com/"
+            else -> "https://loginc.vconexion.com/"
+        }
+
+        val url = baseUrl + "Api_enviar_token.php"
+
         val json = JSONObject().apply {
             put("correo", correo)
         }
@@ -85,3 +95,4 @@ class OlvideContrasenaActivity : AppCompatActivity() {
         })
     }
 }
+

@@ -8,11 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.vconexionsas.R
+import com.example.vconexionsas.utils.ContactoUtils
 
 class SesionPagosFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,9 +36,10 @@ class SesionPagosFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             findNavController().popBackStack()
         }
+
         val btnEnviar = view.findViewById<Button>(R.id.btnEnviarComprobante)
         btnEnviar.setOnClickListener {
-            val numero = "573164116348" // Reemplaza por el número real
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.FACTURACION)
             val mensaje = "Hola, deseo enviar el comprobante de pago de mi factura."
             val url = "https://wa.me/$numero?text=${Uri.encode(mensaje)}"
 
@@ -33,7 +47,6 @@ class SesionPagosFragment : Fragment() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
-
 
         return view
     }

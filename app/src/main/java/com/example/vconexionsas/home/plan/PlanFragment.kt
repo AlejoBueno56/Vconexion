@@ -14,6 +14,7 @@ import com.example.vconexionsas.adapters.PlanAdapter
 import com.example.vconexionsas.databinding.FragmentPlanesBinding
 import com.example.vconexionsas.model.PlanData
 import com.example.vconexionsas.home.plan.obtenerPlanes
+import com.example.vconexionsas.utils.ContactoUtils
 
 class PlanFragment : Fragment() {
 
@@ -76,11 +77,13 @@ class PlanFragment : Fragment() {
     }
 
     private fun openWhatsApp(planName: String) {
-        val phoneNumber = "+573024538585"
+        val phoneNumber = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.COMERCIAL)
         val message = "Me interesa el $planName"
-        val uri = Uri.parse("https://wa.me/$phoneNumber?text=$message")
+        val encodedMessage = java.net.URLEncoder.encode(message, "UTF-8")
+        val uri = Uri.parse("https://wa.me/$phoneNumber?text=$encodedMessage")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
+
 }
 

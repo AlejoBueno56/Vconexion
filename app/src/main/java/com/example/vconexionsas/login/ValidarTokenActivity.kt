@@ -34,7 +34,15 @@ class ValidarTokenActivity : AppCompatActivity() {
     }
 
     private fun validarToken(token: String) {
-        val url = "http://192.168.115.118/api_verificar_token.php"
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val sede = prefs.getString("sede", "Chitaga")
+        val baseUrl = when (sede) {
+            "Pamplona" -> "https://login.vconexion.com/"
+            "Toledo" -> "https://logint.vconexion.com/"
+            "Chitaga" -> "https://loginc.vconexion.com/"
+            else -> "https://loginc.vconexion.com/"
+        }
+        val url = baseUrl + "Api_verificar_token.php"
 
         val json = JSONObject()
         json.put("token", token)
@@ -82,3 +90,4 @@ class ValidarTokenActivity : AppCompatActivity() {
         })
     }
 }
+

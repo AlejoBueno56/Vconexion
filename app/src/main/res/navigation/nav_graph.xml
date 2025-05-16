@@ -95,7 +95,25 @@
     <!-- Acción de navegación (por ejemplo desde FacturaFragment) -->
     <action android:id="@+id/action_contrasenaFragment_to_fragmentPruebaDetectarONU" app:destination="@id/fragmentPruebaDetectarONU" />
 
-    <fragment android:id="@+id/pqrFragment" android:name="com.example.vconexionsas.home.pqr.PqrFragment" android:label="PQR" tools:layout="@layout/fragment_pqr"></fragment>
+    <fragment android:id="@+id/pqrFragment" android:name="com.example.vconexionsas.home.pqr.PqrFragment" android:label="PQR" tools:layout="@layout/fragment_pqr"/>
     <action android:id="@+id/action_home_to_pqr" app:destination="@+id/pqrFragment"> </action>
+
+    <!-- Fragmento y Accion Traslado-->
+
+    <fragment android:id="@+id/trasladoFragment" android:name="com.example.vconexionsas.home.traslado.TrasladoFragment" android:label="Traslado" tools:layout="@layout/fragment_traslado"/>
+    <action android:id="@+id/action_home_to_traslado" app:destination="@+id/trasladoFragment"> </action>
+
+    <!-- Fragmento y Accion Cobertura-->
+
+    <fragment android:id="@+id/coberturaFragment" android:name="com.example.vconexionsas.home.cobertura.CoberturaFragment" android:label="Cobertura" tools:layout="@layout/fragment_cobertura"/>
+    <action android:id="@+id/action_home_to_cobertura" app:destination="@+id/coberturaFragment"> </action>
+
+    <action
+        android:id="@+id/action_inicioFragment_to_perfilFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
 </navigation>

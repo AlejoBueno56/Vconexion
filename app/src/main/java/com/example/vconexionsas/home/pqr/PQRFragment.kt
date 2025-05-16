@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.vconexionsas.R
+import com.example.vconexionsas.utils.ContactoUtils
 import java.net.URLEncoder
 
 class PqrFragment : Fragment() {
@@ -47,12 +48,15 @@ class PqrFragment : Fragment() {
         autoDetalles.setAdapter(adapter)
         autoDetalles.threshold = 0
 
-        autoDetalles.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) autoDetalles.showDropDown()
-        }
+// Evita teclado sin bloquear la selección
+        autoDetalles.showSoftInputOnFocus = false // Solo funciona en API 21+
+        autoDetalles.setRawInputType(android.text.InputType.TYPE_NULL)
+
+// Solo muestra el menú al hacer clic
         autoDetalles.setOnClickListener {
             autoDetalles.showDropDown()
         }
+
 
         autoDetalles.setOnItemClickListener { _, _, position, _ ->
             val item = detallesArray[position]
@@ -72,17 +76,17 @@ class PqrFragment : Fragment() {
             }
 
             val mensaje = "*PQR desde la App VConexion*\n\n*Nombre:* $nombre\n*Código:* $codigo\n*Motivo:* $motivo\n*Detalles:* $detalle"
-            val uri = Uri.parse("https://wa.me/573173369779?text=" + URLEncoder.encode(mensaje, "UTF-8"))
+
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.TECNICO)
+            val uri = Uri.parse("https://wa.me/$numero?text=" + URLEncoder.encode(mensaje, "UTF-8"))
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
 
-        // Configurar el botón de regreso
         val backButton: ImageButton = view.findViewById(R.id.btnBack)
         backButton.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        // Configurar botón físico "atrás"
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             parentFragmentManager.popBackStack()
         }
@@ -90,3 +94,4 @@ class PqrFragment : Fragment() {
         return view
     }
 }
+

@@ -56,7 +56,17 @@ class CambiarContrasenaActivity : AppCompatActivity() {
 
     private fun cambiarContrasena(cedula: String, nuevaContrasena: String) {
         val client = OkHttpClient()
-        val url = "https://loginc.vconexion.com/apiclient.php"
+
+        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val sede = prefs.getString("sede", "Chitaga") // default
+        val baseUrl = when (sede) {
+            "Pamplona" -> "https://login.vconexion.com/"
+            "Toledo" -> "https://logint.vconexion.com/"
+            "Chitaga" -> "https://loginc.vconexion.com/"
+            else -> "https://loginc.vconexion.com/"
+        }
+
+        val url = baseUrl + "apiclient.php"
 
         val json = JSONObject().apply {
             put("cedula", cedula)
@@ -100,8 +110,7 @@ class CambiarContrasenaActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
 
-                                // Limpiar el token anterior si existe
-                                val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                                // Limpiar token
                                 prefs.edit().remove("token").remove("expiracion").apply()
 
                                 // Redirigir al login
@@ -148,4 +157,3 @@ class CambiarContrasenaActivity : AppCompatActivity() {
         })
     }
 }
-
