@@ -79,9 +79,9 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Modelo TPLINK -->
+    <!-- Modelo ZTE_N -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_tplink"
+        android:id="@+id/card_zten"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
@@ -99,13 +99,13 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/ic_tplink"
-                android:contentDescription="Modelo TPLINK" />
+                android:src="@drawable/ic_zte_n"
+                android:contentDescription="Modelo ZTE_N" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TPLINK"
+                android:text="ZTE_N"
                 android:textColor="#265CAF"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -208,40 +208,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ZTE_C"
-                android:textColor="#265CAF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Modelo ZTE_N -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_zten"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="6dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/ic_zte_n"
-                android:contentDescription="Modelo ZTE_N" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ZTE_N"
                 android:textColor="#265CAF"
                 android:textSize="18sp"
                 android:textStyle="bold"

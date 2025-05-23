@@ -42,7 +42,7 @@ class PlanFragment : Fragment() {
                         "120 MB" -> listOf("Ideal para oficinas pequeñas", "Streaming UHD", "Estabilidad garantizada")
                         "150 MB" -> listOf("Para hogares exigentes", "Gaming sin lag", "Alta velocidad")
                         "400 MB" -> listOf("Empresarial dedicado", "IP pública disponible", "Atención prioritaria")
-                        else -> listOf("Conectividad estable", "Sin cláusula", "Soporte 24/7")
+                        else -> listOf("Conectividad estable", "Sin Perdida", "Soporte 24/7")
                     }
                     plan.copy(features = features)
                 }

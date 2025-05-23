@@ -4,7 +4,6 @@ import android.webkit.WebView
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
     var visible by remember { mutableStateOf(true) }
-    var expanded by remember { mutableStateOf(false) }
 
     val cred = when (modelo) {
         "ADC" -> arrayOf("admin", "admin", "username", "password", "byId")
@@ -31,30 +29,63 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
         else -> emptyArray()
     }
 
+    // TP-Link: manejo personalizado
     if (modelo == "TPLINK") {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F4F8)),
-            elevation = CardDefaults.cardElevation(6.dp)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "TP-Link - Rellenar contraseña",
-                    style = MaterialTheme.typography.titleMedium.copy(color = Color(0xFF265CAF))
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { visible = !visible }
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Info,
+                    contentDescription = "Información",
+                    tint = Color(0xFF265CAF),
+                    modifier = Modifier.padding(end = 8.dp)
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = {
-                    webViewRef?.evaluateJavascript(
-                        "javascript:(function() { var pwdField = document.getElementById('password'); if(pwdField){ pwdField.value='770202'; } })()",
-                        null
-                    )
-                }) {
-                    Text("Rellenar Contraseña")
+                Text(
+                    text = if (visible) "Ocultar TP-Link" else "Mostrar TP-Link",
+                    color = Color(0xFF265CAF),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp)
+                )
+            }
+
+            AnimatedVisibility(visible = visible, enter = fadeIn(), exit = fadeOut()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F4F8)),
+                    elevation = CardDefaults.cardElevation(6.dp)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "TP-Link ($modelo) - Rellenar contraseña",
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color(0xFF265CAF))
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            webViewRef?.evaluateJavascript(
+                                """
+                                javascript:(function() {
+                                    var input = document.querySelector('input[type="password"]');
+                                    if (input) input.value = '770202';
+                                    var loginButton = document.querySelector('input[type="submit"], button[type="submit"]');
+                                    if (loginButton) loginButton.click();
+                                })()
+                                """.trimIndent(),
+                                null
+                            )
+                        }) {
+                            Text("Rellenar Contraseña")
+                        }
+                    }
                 }
             }
         }
+
     } else if (cred.isNotEmpty()) {
         val (usuario, clave, userField, passField, method) = cred
 
@@ -99,8 +130,26 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
                         Button(
                             onClick = {
                                 val js = when (method) {
-                                    "byName" -> "(function() { var userField = document.getElementsByName('$userField')[0]; var passField = document.getElementsByName('$passField')[0]; if (userField && passField) { userField.value = '$usuario'; passField.value = '$clave'; } })()"
-                                    else -> "(function() { var userField = document.getElementById('$userField'); var passField = document.getElementById('$passField'); if (userField && passField) { userField.value = '$usuario'; passField.value = '$clave'; } })()"
+                                    "byName" -> """
+                                        (function() {
+                                            var userField = document.getElementsByName('$userField')[0];
+                                            var passField = document.getElementsByName('$passField')[0];
+                                            if (userField && passField) {
+                                                userField.value = '$usuario';
+                                                passField.value = '$clave';
+                                            }
+                                        })()
+                                    """.trimIndent()
+                                    else -> """
+                                        (function() {
+                                            var userField = document.getElementById('$userField');
+                                            var passField = document.getElementById('$passField');
+                                            if (userField && passField) {
+                                                userField.value = '$usuario';
+                                                passField.value = '$clave';
+                                            }
+                                        })()
+                                    """.trimIndent()
                                 }
                                 webViewRef?.evaluateJavascript("javascript:$js", null)
                             },
