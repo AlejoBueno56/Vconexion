@@ -53,7 +53,7 @@ class ContrasenaFragment : Fragment() {
         // Navegación tarjetas ONU
         configurarTarjeta(view, R.id.card_adc, R.id.action_contrasenaFragment_to_adcFragment, scaleTap)
         configurarTarjeta(view, R.id.card_easylink, R.id.action_contrasenaFragment_to_easy4linkFragment, scaleTap)
-        configurarTarjeta(view, R.id.card_tplink, R.id.action_contrasenaFragment_to_tplinkFragment, scaleTap)
+        //configurarTarjeta(view, R.id.card_tplink, R.id.action_contrasenaFragment_to_tplinkFragment, scaleTap)
         configurarTarjeta(view, R.id.card_latic, R.id.action_contrasenaFragment_to_laticFragment, scaleTap)
         configurarTarjeta(view, R.id.card_zkxx, R.id.action_contrasenaFragment_to_zkxxFragment, scaleTap)
         configurarTarjeta(view, R.id.card_ztec, R.id.action_contrasenaFragment_to_ztecFragment, scaleTap)

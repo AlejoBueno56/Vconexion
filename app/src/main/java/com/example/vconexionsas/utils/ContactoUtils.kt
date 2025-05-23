@@ -22,14 +22,14 @@ object ContactoUtils {
 
             TipoContacto.FACTURACION -> when (sede) {
                 "Pamplona" -> "573164116348"
-                "Chitaga" -> "573164116348"
+                "Chitaga" -> "573203753623"
                 "Toledo" -> "573153516178"
                 else -> "573164116348"
             }
 
             TipoContacto.TECNICO -> when (sede) {
                 "Pamplona" -> "573173369779"
-                "Chitaga" -> "573173369779"
+                "Chitaga" -> "573203753623"
                 "Toledo" -> "573153516178"
                 else -> "573173369779"
             }

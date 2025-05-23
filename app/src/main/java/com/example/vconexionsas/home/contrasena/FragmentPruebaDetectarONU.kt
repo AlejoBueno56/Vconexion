@@ -76,9 +76,19 @@ class FragmentPruebaDetectarONU : Fragment() {
                 val titulo = view?.title ?: "Sin título"
                 val modelo = identificarModeloDesdeTitulo(titulo, url)
                 modeloDetectado = modelo
-                modeloText.text = "Modelo detectado por Web: $modelo"
+
+                // Mostramos toda la información en pantalla
+                modeloText.text = """
+        Título detectado: $titulo
+        URL detectada: $url
+        Modelo detectado: $modelo
+    """.trimIndent()
+
+                // Log para depuración
+                Log.d("DETECTAR_ONU", "Título: $titulo, URL: $url, Modelo: $modelo")
+
+                // Continúa normalmente
                 mostrarCredencialesCompose()
-                Log.d("DETECTAR_ONU", "Detectado por Web: $modelo (título: $titulo, url: $url)")
             }
         }
         webView.loadUrl("http://$gatewayIp")
@@ -86,12 +96,13 @@ class FragmentPruebaDetectarONU : Fragment() {
 
     private fun identificarModeloDesdeTitulo(titulo: String, url: String?): String {
         return when {
+            titulo.contains("XN020", ignoreCase = true) -> "TPLINK"
             titulo.contains("ZTE", ignoreCase = true) -> "ZTE"
             titulo.contains("Huawei", ignoreCase = true) -> "Huawei"
             titulo.contains("Fiberhome", ignoreCase = true) -> "Fiberhome"
             titulo.contains("ADC", ignoreCase = true) -> "ADC"
             titulo.contains("EASY4", ignoreCase = true) -> "EASY4Link"
-            titulo.contains("TP-Link", ignoreCase = true) -> "TPLINK"
+            titulo.contains("TL-WR", ignoreCase = true) || url?.contains("LoginRpm", ignoreCase = true) == true -> "TPLINK"
             titulo.contains("ZKXX", ignoreCase = true) -> "ZC"
             titulo.contains("F663N", ignoreCase = true) -> "ZTE_China"
             url?.contains("login.asp", ignoreCase = true) == true -> "LATIC" // para detección por URL
