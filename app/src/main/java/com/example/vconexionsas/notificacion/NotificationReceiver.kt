@@ -14,7 +14,7 @@ import com.example.vconexionsas.R
 class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Log.d("NotificationReceiver", "🟢 onReceive() ejecutado")
-        Toast.makeText(context, "🔔 Recordatorio enviado", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Recordatorio enviado", Toast.LENGTH_SHORT).show()
 
         val canalId = "canal_factura"
         val canalNombre = "Recordatorio de Factura"

@@ -28,13 +28,13 @@ object NotificacionScheduler {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
-            Log.e("NotificacionScheduler", "❌ No tiene permiso para alarmas exactas")
+            Log.e("NotificacionScheduler", " No tiene permiso para alarmas exactas")
             return
         }
 
         try {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-            Log.d("NotificacionScheduler", "✅ Programada para: ${calendar.time}")
+            Log.d("NotificacionScheduler", "Programada para: ${calendar.time}")
         } catch (e: SecurityException) {
             e.printStackTrace()
         }

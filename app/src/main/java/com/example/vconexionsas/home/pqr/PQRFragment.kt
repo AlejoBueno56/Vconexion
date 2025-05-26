@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
 import com.example.vconexionsas.utils.ContactoUtils
 import java.net.URLEncoder
@@ -36,7 +38,18 @@ class PqrFragment : Fragment() {
         textNombre = view.findViewById(R.id.textNombreUsuario)
         textCodigo = view.findViewById(R.id.textCodigoUsuario)
 
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val masterKey = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "secure_user_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val nombre = prefs.getString("nombre_usuario", "Usuario")
         val codigo = prefs.getString("codigo_usuario", "000000")
 
@@ -47,16 +60,12 @@ class PqrFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, detallesArray)
         autoDetalles.setAdapter(adapter)
         autoDetalles.threshold = 0
-
-// Evita teclado sin bloquear la selección
-        autoDetalles.showSoftInputOnFocus = false // Solo funciona en API 21+
+        autoDetalles.showSoftInputOnFocus = false
         autoDetalles.setRawInputType(android.text.InputType.TYPE_NULL)
 
-// Solo muestra el menú al hacer clic
         autoDetalles.setOnClickListener {
             autoDetalles.showDropDown()
         }
-
 
         autoDetalles.setOnItemClickListener { _, _, position, _ ->
             val item = detallesArray[position]
@@ -94,4 +103,3 @@ class PqrFragment : Fragment() {
         return view
     }
 }
-

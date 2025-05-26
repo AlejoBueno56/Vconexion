@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
 import com.example.vconexionsas.login.MainActivity
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,8 @@ class PerfilFragment : Fragment() {
     private lateinit var avatarLoading: ProgressBar
     private lateinit var contentLayout: View
     private lateinit var perfilPrefs: SharedPreferences
+    private lateinit var nombreTextView: TextView
+    private lateinit var correoTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +34,8 @@ class PerfilFragment : Fragment() {
     ): View {
         val rootView = inflater.inflate(R.layout.fragment_perfil, container, false)
 
-        val nombreTextView: TextView = rootView.findViewById(R.id.nombreUsuario)
-        val correoTextView: TextView = rootView.findViewById(R.id.emailUsuario)
+        nombreTextView = rootView.findViewById(R.id.nombreUsuario)
+        correoTextView = rootView.findViewById(R.id.emailUsuario)
         avatarImageView = rootView.findViewById(R.id.avatar)
         avatarLoading = rootView.findViewById(R.id.avatarLoading)
         contentLayout = rootView.findViewById(R.id.perfilContentContainer)
@@ -41,33 +45,25 @@ class PerfilFragment : Fragment() {
         avatarLoading.visibility = View.VISIBLE
         contentLayout.alpha = 0f
 
-        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        perfilPrefs = requireActivity().getSharedPreferences("perfil_usuario", Context.MODE_PRIVATE)
+        actualizarPerfil()
 
-        val nombre = perfilPrefs.getString("nombre", sharedPreferences.getString("nombre_usuario", "Usuario desconocido"))
-        val correo = sharedPreferences.getString("correo_usuario", "correo@ejemplo.com")
-        val rutaImagen = perfilPrefs.getString("ruta_imagen", null)
-
-        nombreTextView.text = nombre
-        correoTextView.text = correo
-
-        lifecycleScope.launch {
-            val bitmap = withContext(Dispatchers.IO) {
-                rutaImagen?.let {
-                    val archivo = File(it)
-                    if (archivo.exists()) BitmapFactory.decodeFile(it) else null
-                }
-            }
-            avatarLoading.visibility = View.GONE
-            if (bitmap != null) {
-                avatarImageView.setImageBitmap(bitmap)
-            } else {
-                avatarImageView.setImageResource(R.drawable.ic_person)
-            }
-            contentLayout.animate().alpha(1f).setDuration(400).start()
+        parentFragmentManager.setFragmentResultListener("perfil_actualizado", viewLifecycleOwner) { _, _ ->
+            actualizarPerfil()
         }
 
         btnCerrarSesion.setOnClickListener {
+            val masterKeyAlias = MasterKey.Builder(requireContext())
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+
+            val sharedPreferences = EncryptedSharedPreferences.create(
+                requireContext(),
+                "secure_user_prefs",
+                masterKeyAlias,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+
             sharedPreferences.edit().clear().apply()
             perfilPrefs.edit().remove("ruta_imagen").apply()
             Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
@@ -91,4 +87,52 @@ class PerfilFragment : Fragment() {
 
         return rootView
     }
+
+    private fun actualizarPerfil() {
+        val masterKeyAlias = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val sharedPreferences = EncryptedSharedPreferences.create(
+            requireContext(),
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        perfilPrefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "perfil_usuario",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val nombre = perfilPrefs.getString("nombre", sharedPreferences.getString("nombre_usuario", "Usuario desconocido"))
+        val correo = sharedPreferences.getString("correo_usuario", "correo@ejemplo.com")
+        val rutaImagen = perfilPrefs.getString("ruta_imagen", null)
+
+        nombreTextView.text = nombre
+        correoTextView.text = correo
+
+        lifecycleScope.launch {
+            val bitmap = withContext(Dispatchers.IO) {
+                rutaImagen?.let {
+                    val archivo = File(it)
+                    if (archivo.exists()) BitmapFactory.decodeFile(it) else null
+                }
+            }
+            avatarLoading.visibility = View.GONE
+            if (bitmap != null) {
+                avatarImageView.setImageBitmap(bitmap)
+            } else {
+                avatarImageView.setImageResource(R.drawable.ic_person)
+            }
+            contentLayout.animate().alpha(1f).setDuration(400).start()
+        }
+    }
 }
+
+
+

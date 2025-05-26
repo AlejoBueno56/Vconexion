@@ -7,23 +7,28 @@ plugins {
     id("kotlin-kapt")
 
 }
-
 android {
     namespace = "com.example.vconexionsas"
     compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.vconexionsas"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 35
         versionCode = 10
         versionName = "2.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "URL_PAMPLONA", "\"https://login.vconexion.com/\"")
+        buildConfigField("String", "URL_TOLEDO", "\"https://logint.vconexion.com/\"")
+        buildConfigField("String", "URL_CHITAGA", "\"https://loginc.vconexion.com/\"")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true // activa R8/ProGuard
+            isShrinkResources = true // elimina recursos no usados
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -41,6 +46,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
         viewBinding = true
     }
@@ -87,6 +93,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("androidx.security:security-crypto:1.1.0-alpha06")
 }
 
 
