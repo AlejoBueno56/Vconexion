@@ -2,8 +2,11 @@ package com.example.vconexionsas.home.plan
 
 import android.content.Context
 import android.widget.Toast
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.vconexionsas.BuildConfig
 import com.example.vconexionsas.model.PlanData
 import org.json.JSONException
 
@@ -12,13 +15,24 @@ fun obtenerPlanes(
     onSuccess: (List<PlanData>) -> Unit,
     onError: (() -> Unit)? = null
 ) {
-    val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+    val masterKeyAlias = MasterKey.Builder(context)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    val prefs = EncryptedSharedPreferences.create(
+        context,
+        "secure_user_prefs",
+        masterKeyAlias,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
+
     val sede = prefs.getString("sede", "Chitaga")
     val baseUrl = when (sede) {
-        "Pamplona" -> "https://login.vconexion.com/"
-        "Toledo" -> "https://logint.vconexion.com/"
-        "Chitaga" -> "https://loginc.vconexion.com/"
-        else -> "https://loginc.vconexion.com/"
+        "Pamplona" -> BuildConfig.URL_PAMPLONA
+        "Toledo" -> BuildConfig.URL_TOLEDO
+        "Chitaga" -> BuildConfig.URL_CHITAGA
+        else -> BuildConfig.URL_CHITAGA
     }
 
     val url = baseUrl + "apipag.php?accion=listar_planes"
@@ -60,3 +74,4 @@ fun obtenerPlanes(
 
     queue.add(request)
 }
+

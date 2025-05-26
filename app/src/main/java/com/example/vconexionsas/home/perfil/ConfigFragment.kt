@@ -18,6 +18,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.databinding.FragmentConfigBinding
 import kotlinx.coroutines.*
 import java.io.File
@@ -29,7 +31,6 @@ class ConfigFragment : Fragment() {
     private var selectedImageBitmap: Bitmap? = null
     private lateinit var prefs: SharedPreferences
 
-    // 📷 Nuevo Photo Picker
     private val imagePickerLauncher = registerForActivityResult(PickVisualMedia()) { uri ->
         if (uri != null) {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -47,9 +48,19 @@ class ConfigFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentConfigBinding.inflate(inflater, container, false)
-        prefs = requireContext().getSharedPreferences("perfil_usuario", Context.MODE_PRIVATE)
 
-        // Nombre e imagen guardada
+        val masterKeyAlias = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        prefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "perfil_usuario",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val nombreGuardado = prefs.getString("nombre", "")
         val rutaImagen = prefs.getString("ruta_imagen", null)
         binding.editNombre.setText(nombreGuardado)
@@ -62,17 +73,14 @@ class ConfigFragment : Fragment() {
             }
         }
 
-        // Abrir photo picker
         val abrirSelector = {
             imagePickerLauncher.launch(
                 PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
             )
-
         }
         binding.imagePerfilEditar.setOnClickListener { abrirSelector() }
         binding.textCambiarFoto.setOnClickListener { abrirSelector() }
 
-        // Guardar nombre e imagen
         binding.btnGuardar.setOnClickListener {
             val nuevoNombre = binding.editNombre.text.toString()
             val editor = prefs.edit()
@@ -99,7 +107,6 @@ class ConfigFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
-        // Botón de regreso visual
         binding.backButton.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }

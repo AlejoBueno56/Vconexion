@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
 
 class NotificacionesFragment : Fragment() {
@@ -28,7 +30,18 @@ class NotificacionesFragment : Fragment() {
 
         switchNotificaciones = view.findViewById(R.id.switchNotificaciones)
         val btnVolver: Button = view.findViewById(R.id.btnVolver)
-        val prefs = requireActivity().getSharedPreferences("notificaciones", Context.MODE_PRIVATE)
+
+        val masterKeyAlias = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "notificaciones",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
 
         val activadas = prefs.getBoolean("activadas", false)
         switchNotificaciones.isChecked = activadas
@@ -67,14 +80,14 @@ class NotificacionesFragment : Fragment() {
         btnVolver.setOnClickListener {
             findNavController().popBackStack()
         }
-        // Manejo del botón Atrás del sistema para volver al fragmento anterior
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             parentFragmentManager.popBackStack()
         }
 
-
         return view
     }
 }
+
 
 

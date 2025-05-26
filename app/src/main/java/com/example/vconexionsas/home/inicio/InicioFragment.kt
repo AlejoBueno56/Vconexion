@@ -11,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
 import com.example.vconexionsas.utils.ContactoUtils
 import com.example.vconexionsas.utils.VersionUtils
@@ -95,7 +97,7 @@ class InicioFragment : Fragment() {
     }
 
     private fun abrirChatWhatsapp(context: Context, numero: String) {
-        val url = "https://wa.me/${numero.replace("+", "")}" // Asegura formato sin el "+"
+        val url = "https://wa.me/${numero.replace("+", "")}"
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             context.startActivity(intent)
@@ -105,25 +107,35 @@ class InicioFragment : Fragment() {
     }
 
     private fun escucharCambiosPromocion() {
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val sede = prefs.getString("sede", "Chitaga") ?: "Chitaga"
 
-        // Mapeo entre sede y documento en Firestore
         val documentoPromocion = when (sede.lowercase()) {
             "pamplona" -> "promo_pamplona"
             "toledo" -> "promo_toledo"
-            else -> "promo_actual" // Chitaga u otra sede por defecto
+            else -> "promo_actual"
         }
 
         db.collection("promociones").document(documentoPromocion)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    Log.e("Firestore", "❌ Error al obtener promoción para $sede: ${error.message}")
+                    Log.e("Firestore", "Error al obtener promoción para $sede: ${error.message}")
                     return@addSnapshotListener
                 }
 
                 if (snapshot == null || !snapshot.exists()) {
-                    Log.w("Firestore", "⚠️ Documento $documentoPromocion no existe o está vacío.")
+                    Log.w("Firestore", "Documento $documentoPromocion no existe o está vacío.")
                     return@addSnapshotListener
                 }
 
@@ -131,7 +143,7 @@ class InicioFragment : Fragment() {
                 val descripcion = snapshot.getString("descripcion") ?: ""
                 val imagenUrl = snapshot.getString("imagenUrl") ?: ""
 
-                Log.d("Firestore", "📦 Promo ($sede): titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl")
+                Log.d("Firestore", "Promo ($sede): titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl")
 
                 tituloPromo.text = titulo
                 descripcionPromo.text = descripcion
@@ -140,19 +152,18 @@ class InicioFragment : Fragment() {
                     Picasso.get().load(imagenUrl)
                         .into(imagenPromo, object : com.squareup.picasso.Callback {
                             override fun onSuccess() {
-                                Log.d("Picasso", "✅ Imagen cargada correctamente.")
+                                Log.d("Picasso", "Imagen cargada correctamente.")
                             }
 
                             override fun onError(e: Exception?) {
-                                Log.e("Picasso", "❌ Error al cargar imagen: ${e?.message}")
+                                Log.e("Picasso", "Error al cargar imagen: ${e?.message}")
                             }
                         })
                 } else {
-                    Log.w("Picasso", "⚠️ URL de imagen vacía.")
+                    Log.w("Picasso", "URL de imagen vacía.")
                 }
             }
     }
-
 }
 
 

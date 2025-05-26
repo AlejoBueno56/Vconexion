@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.databinding.ActivityOlvideContrasenaBinding
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -37,7 +39,18 @@ class OlvideContrasenaActivity : AppCompatActivity() {
     private fun enviarToken(correo: String) {
         binding.progressBar.visibility = View.VISIBLE
 
-        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(this)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            this,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val sede = prefs.getString("sede", "Chitaga")
         val baseUrl = when (sede) {
             "Pamplona" -> "https://login.vconexion.com/"
@@ -95,4 +108,5 @@ class OlvideContrasenaActivity : AppCompatActivity() {
         })
     }
 }
+
 

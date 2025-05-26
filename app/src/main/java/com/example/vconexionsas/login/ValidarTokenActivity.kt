@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.example.vconexionsas.BuildConfig
 import com.example.vconexionsas.databinding.ActivityValidarTokenBinding
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -34,13 +37,24 @@ class ValidarTokenActivity : AppCompatActivity() {
     }
 
     private fun validarToken(token: String) {
-        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(this)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            this,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val sede = prefs.getString("sede", "Chitaga")
         val baseUrl = when (sede) {
-            "Pamplona" -> "https://login.vconexion.com/"
-            "Toledo" -> "https://logint.vconexion.com/"
-            "Chitaga" -> "https://loginc.vconexion.com/"
-            else -> "https://loginc.vconexion.com/"
+            "Pamplona" -> BuildConfig.URL_PAMPLONA
+            "Toledo" -> BuildConfig.URL_TOLEDO
+            "Chitaga" -> BuildConfig.URL_CHITAGA
+            else -> BuildConfig.URL_CHITAGA
         }
         val url = baseUrl + "Api_verificar_token.php"
 
@@ -90,4 +104,3 @@ class ValidarTokenActivity : AppCompatActivity() {
         })
     }
 }
-

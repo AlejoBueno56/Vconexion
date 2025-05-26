@@ -44,6 +44,7 @@ class PlanFragment : Fragment() {
                         "400 MB" -> listOf("Empresarial dedicado", "IP pública disponible", "Atención prioritaria")
                         else -> listOf("Conectividad estable", "Sin Perdida", "Soporte 24/7")
                     }
+
                     plan.copy(features = features)
                 }
 

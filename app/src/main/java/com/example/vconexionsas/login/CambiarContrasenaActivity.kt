@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.example.vconexionsas.BuildConfig
 import com.example.vconexionsas.R
 import com.example.vconexionsas.home.HomeActivity
 import okhttp3.*
@@ -57,13 +60,24 @@ class CambiarContrasenaActivity : AppCompatActivity() {
     private fun cambiarContrasena(cedula: String, nuevaContrasena: String) {
         val client = OkHttpClient()
 
-        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(this)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            this,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val sede = prefs.getString("sede", "Chitaga") // default
         val baseUrl = when (sede) {
-            "Pamplona" -> "https://login.vconexion.com/"
-            "Toledo" -> "https://logint.vconexion.com/"
-            "Chitaga" -> "https://loginc.vconexion.com/"
-            else -> "https://loginc.vconexion.com/"
+            "Pamplona" -> BuildConfig.URL_PAMPLONA
+            "Toledo" -> BuildConfig.URL_TOLEDO
+            "Chitaga" -> BuildConfig.URL_CHITAGA
+            else -> BuildConfig.URL_CHITAGA
         }
 
         val url = baseUrl + "apiclient.php"

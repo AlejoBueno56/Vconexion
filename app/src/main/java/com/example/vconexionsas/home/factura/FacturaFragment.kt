@@ -2,6 +2,7 @@ package com.example.vconexionsas.home.factura
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -14,6 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.example.vconexionsas.BuildConfig
 import com.example.vconexionsas.R
 import com.example.vconexionsas.databinding.FragmentFacturaBinding
 import okhttp3.*
@@ -35,7 +39,7 @@ class FacturaFragment : Fragment() {
     ): View {
         binding = FragmentFacturaBinding.inflate(inflater, container, false)
 
-        val prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSecurePrefs(requireContext())
         val codigoUsuario = prefs.getString("codigo_usuario", "") ?: ""
 
         if (codigoUsuario.isNotEmpty()) {
@@ -80,20 +84,34 @@ class FacturaFragment : Fragment() {
         return binding.root
     }
 
+    private fun getSecurePrefs(context: Context): SharedPreferences {
+        val masterKeyAlias = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        return EncryptedSharedPreferences.create(
+            context,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
     private fun obtenerBaseUrlPorSede(): String {
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSecurePrefs(requireContext())
         val sede = prefs.getString("sede", "Chitaga")
 
         return when (sede) {
-            "Pamplona" -> "https://login.vconexion.com/"
-            "Toledo" -> "https://logint.vconexion.com/"
-            "Chitaga" -> "https://loginc.vconexion.com/"
-            else -> "https://loginc.vconexion.com/"
-        }
+                "Pamplona" -> BuildConfig.URL_PAMPLONA
+                "Toledo" -> BuildConfig.URL_TOLEDO
+                "Chitaga" -> BuildConfig.URL_CHITAGA
+                else -> BuildConfig.URL_CHITAGA
+            }
     }
 
     private fun obtenerFactura() {
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSecurePrefs(requireContext())
         val codigoUsuario = prefs.getString("codigo_usuario", null)
         val token = prefs.getString("token", null)
 
@@ -319,7 +337,7 @@ class FacturaFragment : Fragment() {
     }
 
     private fun obtenerCodigoDesdePrefs(): String {
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSecurePrefs(requireContext())
         return prefs.getString("codigo_usuario", "") ?: ""
     }
 }

@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
 import com.example.vconexionsas.utils.ContactoUtils
 import java.net.URLEncoder
@@ -32,7 +34,18 @@ class TrasladoFragment : Fragment() {
         textNombre = view.findViewById(R.id.textNombreUsuario)
         textCodigo = view.findViewById(R.id.textCodigoUsuario)
 
-        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val masterKey = MasterKey.Builder(requireContext())
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            requireContext(),
+            "secure_user_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val nombre = prefs.getString("nombre_usuario", "Usuario")
         val codigo = prefs.getString("codigo_usuario", "000000")
 

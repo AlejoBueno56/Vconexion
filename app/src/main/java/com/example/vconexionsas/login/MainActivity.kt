@@ -24,19 +24,35 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.example.vconexionsas.BuildConfig
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val masterKeyAlias = MasterKey.Builder(this)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            this,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
         val token = prefs.getString("token", null)
         val exp = prefs.getLong("expiracion", 0L)
         val sede = prefs.getString("sede", null)
         val ahora = System.currentTimeMillis() / 1000
         val version = VersionUtils.getAppVersion(this)
-
 
         if (!token.isNullOrEmpty() && exp > ahora) {
             val intent = Intent(this, HomeActivity::class.java)
@@ -65,16 +81,14 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.loginvisual)
 
-        val btnCambiarSede = findViewById<Button>(R.id.btnCambiarSede)
-        btnCambiarSede.setOnClickListener {
+        findViewById<Button>(R.id.btnCambiarSede).setOnClickListener {
             prefs.edit().remove("sede").apply()
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
-        val forgotPassword = findViewById<TextView>(R.id.forgot_password)
-        forgotPassword.setOnClickListener {
+        findViewById<TextView>(R.id.forgot_password).setOnClickListener {
             val intent = Intent(this, OlvideContrasenaActivity::class.java)
             startActivity(intent)
         }
@@ -119,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
-                Log.d("FCM_TOKEN", "🔑 Token: $token")
+                //Log.d("FCM_TOKEN", "Token: $token")
             }
 
             val versionTextView = findViewById<TextView>(R.id.version_app)
@@ -141,14 +155,25 @@ class MainActivity : AppCompatActivity() {
     ) {
         val client = OkHttpClient()
 
-        val sede = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-            .getString("sede", "Chitaga")
+        val masterKeyAlias = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val securePrefs = EncryptedSharedPreferences.create(
+            context,
+            "secure_user_prefs",
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val sede = securePrefs.getString("sede", "Chitaga")
 
         val baseUrl = when (sede) {
-            "Pamplona" -> "https://login.vconexion.com/"
-            "Toledo" -> "https://logint.vconexion.com/"
-            "Chitaga" -> "https://loginc.vconexion.com/"
-            else -> "https://loginc.vconexion.com/"
+            "Pamplona" -> BuildConfig.URL_PAMPLONA
+            "Toledo" -> BuildConfig.URL_TOLEDO
+            "Chitaga" -> BuildConfig.URL_CHITAGA
+            else -> BuildConfig.URL_CHITAGA
         }
 
         val url = baseUrl + "apiclient.php"
@@ -164,7 +189,7 @@ class MainActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                Log.e("LOGIN_ERROR", "Falló conexión: ${e.message}")
+              //  Log.e("LOGIN_ERROR", "Falló conexión: ${e.message}")
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
@@ -189,8 +214,7 @@ class MainActivity : AppCompatActivity() {
                             return@post
                         }
 
-                        val sharedPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                        sharedPref.edit().apply {
+                        securePrefs.edit().apply {
                             putString("codigo_usuario", data.optString("codigo_usuario", ""))
                             putString("nombre_usuario", data.optString("nombre", "Usuario"))
                             putString("correo_usuario", data.optString("correo", "correo@ejemplo.com"))
@@ -213,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(context, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
                         callback(true)
                     } catch (e: Exception) {
-                        Log.e("LOGIN_ERROR", "Error al parsear: ${e.message}")
+                       // Log.e("LOGIN_ERROR", "Error al parsear: ${e.message}")
                         Toast.makeText(context, "Error al procesar respuesta", Toast.LENGTH_SHORT).show()
                         callback(false)
                     }
