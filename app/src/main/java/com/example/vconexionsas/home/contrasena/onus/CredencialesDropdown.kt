@@ -24,12 +24,12 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
         "ADC" -> arrayOf("admin", "admin", "username", "password", "byId")
         "EASY4link" -> arrayOf("admin", "1234", "username", "password", "byId")
         "LATIC" -> arrayOf("admin", "admin", "username", "password", "byName")
-        "ZTE_China" -> arrayOf("admin", "admin", "Username", "Password", "byName")
+        "ZTE_China" -> arrayOf("admin", "admin", "Frm_Username", "Frm_Password", "byId")
+        "ZTE" -> arrayOf("admin", "admin", "Frm_Username", "Frm_Password", "byId") // Actualizado
         "ZC" -> arrayOf("user", "120o605u", "username", "password", "byId")
         else -> emptyArray()
     }
 
-    // TP-Link: manejo personalizado
     if (modelo == "TPLINK") {
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -80,6 +80,70 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
                             )
                         }) {
                             Text("Rellenar Contraseña")
+                        }
+                    }
+                }
+            }
+        }
+
+    } else if (modelo == "ZTE") {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { visible = !visible }
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Info,
+                    contentDescription = "Información",
+                    tint = Color(0xFF265CAF),
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(
+                    text = if (visible) "Ocultar ZTE" else "Mostrar ZTE",
+                    color = Color(0xFF265CAF),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp)
+                )
+            }
+
+            AnimatedVisibility(visible = visible, enter = fadeIn(), exit = fadeOut()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F4F8)),
+                    elevation = CardDefaults.cardElevation(6.dp)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "ZTE F660 - Autocompletar",
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color(0xFF265CAF))
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(
+                            onClick = {
+                                webViewRef?.evaluateJavascript(
+                                    """
+                                    javascript:(function() {
+                                        var userField = document.getElementById('Frm_Username');
+                                        var passField = document.getElementById('Frm_Password');
+                                        if (userField && passField) {
+                                            userField.value = 'admin';
+                                            passField.value = 'Web@0063';
+                                        }
+                                        var loginButton = document.querySelector('input[type="submit"], button[type="submit"]');
+                                        if (loginButton) loginButton.click();
+                                    })()
+                                    """.trimIndent(),
+                                    null
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF265CAF))
+                        ) {
+                            Text("Autocompletar y Acceder", color = Color.White)
                         }
                     }
                 }
@@ -164,3 +228,4 @@ fun CredencialesDropdown(modelo: String, webViewRef: WebView?) {
         }
     }
 }
+

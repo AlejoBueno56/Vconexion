@@ -138,7 +138,7 @@ class FacturaFragment : Fragment() {
                 if (!isAdded) return
                 activity?.runOnUiThread {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Error de conexión: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -152,7 +152,7 @@ class FacturaFragment : Fragment() {
 
                 if (body.isNullOrBlank()) {
                     activity?.runOnUiThread {
-                        Toast.makeText(requireContext(), "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Respuesta erronea", Toast.LENGTH_SHORT).show()
                     }
                     return
                 }
@@ -183,9 +183,8 @@ class FacturaFragment : Fragment() {
                         }
                     }
                 } catch (e: JSONException) {
-                    Log.e("FacturaFragment", "Error al convertir JSON: ${e.message}")
                     activity?.runOnUiThread {
-                        Toast.makeText(requireContext(), "Respuesta inesperada del servidor", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Respuesta no completada", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -223,7 +222,7 @@ class FacturaFragment : Fragment() {
                 if (!isAdded) return
                 activity?.runOnUiThread {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Error de conexión: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()
                     callback(null)
                 }
             }
@@ -260,13 +259,13 @@ class FacturaFragment : Fragment() {
                         }
                     } catch (e: Exception) {
                         activity?.runOnUiThread {
-                            Toast.makeText(requireContext(), "Error al procesar respuesta: ${e.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Error al procesar respuesta", Toast.LENGTH_SHORT).show()
                             callback(null)
                         }
                     }
                 } else {
                     activity?.runOnUiThread {
-                        Toast.makeText(requireContext(), "Factura no disponible (${response.code})", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Factura no disponible ", Toast.LENGTH_SHORT).show()
                         callback(null)
                     }
                 }
@@ -291,7 +290,7 @@ class FacturaFragment : Fragment() {
                 if (!isAdded) return
                 activity?.runOnUiThread {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context, "Error de descarga: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Error de descarga", Toast.LENGTH_LONG).show()
                 }
             }
 

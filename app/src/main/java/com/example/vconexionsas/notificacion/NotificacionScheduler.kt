@@ -49,6 +49,6 @@ object NotificacionScheduler {
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(pendingIntent)
-        Log.d("NotificacionScheduler", "❎ Notificación cancelada")
+        Log.d("NotificacionScheduler", "Notificación cancelada")
     }
 }
