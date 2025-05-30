@@ -98,6 +98,7 @@ class FragmentPruebaDetectarONU : Fragment() {
         return when {
             titulo.contains("XN020", ignoreCase = true) -> "TPLINK"
             titulo.contains("ZTE", ignoreCase = true) -> "ZTE"
+            titulo.contains("F660", ignoreCase = true) -> "ZTE"
             titulo.contains("Huawei", ignoreCase = true) -> "Huawei"
             titulo.contains("Fiberhome", ignoreCase = true) -> "Fiberhome"
             titulo.contains("ADC", ignoreCase = true) -> "ADC"
