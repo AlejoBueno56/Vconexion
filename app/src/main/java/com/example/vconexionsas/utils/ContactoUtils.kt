@@ -1,6 +1,8 @@
 package com.example.vconexionsas.utils
 
 import android.content.Context
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 
 object ContactoUtils {
 
@@ -9,8 +11,20 @@ object ContactoUtils {
     }
 
     fun obtenerNumeroWhatsapp(context: Context, tipo: TipoContacto): String {
-        val prefs = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val sede = prefs.getString("sede", "Chitaga")
+        // Usar EncryptedSharedPreferences igual que en MainActivity
+        val masterKeyAlias = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val prefs = EncryptedSharedPreferences.create(
+            context,
+            "secure_user_prefs", // Mismo nombre que en MainActivity
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val sede = prefs.getString("sede", "Chitaga") ?: "Chitaga"
 
         return when (tipo) {
             TipoContacto.COMERCIAL -> when (sede) {
