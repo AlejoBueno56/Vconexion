@@ -35,10 +35,11 @@ class NotificationReceiver : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, canalId)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("📅 Recordatorio de pago")
-            .setContentText("Hoy es 5 del mes. ¡Recuerda pagar tu factura!")
+            .setContentTitle("📢 Último día para pagar tu factura")
+            .setContentText("Hoy es el último día de pago. Si ya realizaste tu pago, puedes ignorar este recordatorio. ¡Gracias por estar al día!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
+
 
         notificationManager.notify(notificationId, builder.build())
     }

@@ -8,29 +8,69 @@
     android:background="#F5F7FA"
     tools:context=".home.servicios.CableadoEstructuradoFragment">
 
-    <!-- Botón de regreso -->
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_back"
-        android:contentDescription="@string/back_button"
-        app:tint="#265caf"
+    <!-- Header con gradiente -->
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="#F5F7FA"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ScrollView para contenido -->
-    <ScrollView
-        android:id="@+id/scrollView"
+    <!-- Botón de regreso mejorado -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backButtonCard"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="42dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            app:tint="#265caf"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Título del header -->
+
+    <!-- ScrollView mejorado -->
+
+    <TextView
+        android:id="@+id/headerTitle"
+        android:layout_width="282dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Cableado Estructurado"
+        android:textColor="#265CAF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/backButtonCard"
+        app:layout_constraintStart_toEndOf="@id/backButtonCard"
+        app:layout_constraintTop_toTopOf="@id/backButtonCard"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="80dp"
-        android:padding="16dp"
+        android:layout_marginTop="20dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -39,132 +79,197 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
+            android:paddingHorizontal="20dp">
 
-            <!-- Imagen principal -->
-
-            <!-- Título principal -->
-            <ImageView
-                android:id="@+id/cableadoHeaderImage"
+            <!-- Imagen principal mejorada -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/heroImageCard"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_background"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_cable" />
+                android:layout_height="200dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="#265CAF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/heroIcon"
+                        android:layout_width="348dp"
+                        android:layout_height="154dp"
+                        android:contentDescription="@string/structured_cabling_icon_description"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_lan"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Tarjeta: Cuando el fracaso no es una opción -->
-
-            <TextView
-                android:id="@+id/titleServicios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="110dp"
-                android:layout_marginEnd="70dp"
-                android:layout_marginBottom="24dp"
-                android:text="Cableado Estructurado"
-                android:textColor="#265CAF"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/reliabilityCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <!-- Icono en círculo -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="#265CAF"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="6dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_usb"
+                            android:contentDescription="@string/reliability_icon_description" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:id="@+id/cableadoSubtitle1"
+                        android:id="@+id/reliabilityTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:text="Cuando el fracaso no es una opción"
-                        android:textColor="#333333"
+                        android:textColor="#265CAF"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginBottom="12dp" />
 
                     <TextView
-                        android:id="@+id/cableadoDescription1"
+                        android:id="@+id/reliabilityDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Maximiza tu infraestructura tecnológica con cableado confiable, eficiente y flexible."
-                        android:textSize="16sp"
-                        android:textColor="#555555" />
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Tarjeta: ¿Qué nos hace diferentes? -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/differenceCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="16dp">
+                    android:gravity="center"
+                    android:padding="24dp">
 
-                    <ImageView
-                        android:id="@+id/cableadoHeaderImage2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginBottom="16dp"
-                        android:src="@drawable/logoazul" />
+                        app:cardBackgroundColor="#4A7BC8"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="6dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/logoazul"
+                            android:contentDescription="@string/company_logo_description" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:id="@+id/cableadoSubtitle2"
+                        android:id="@+id/differenceTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="¿Qué nos hace diferentes?"
-                        android:textColor="#333333"
+                        android:textColor="#265CAF"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginBottom="12dp" />
 
                     <TextView
-                        android:id="@+id/cableadoDescription2"
+                        android:id="@+id/differenceDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Tecnología de punta, escalabilidad y máxima fiabilidad en nuestras soluciones de cableado."
-                        android:textSize="16sp"
-                        android:textColor="#555555"
-                        android:gravity="center" />
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Tarjeta: Introducción al Cableado -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/introCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="#6B9BD1"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="6dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_cable"
+                            android:contentDescription="@string/intro_icon_description" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
                         android:id="@+id/introTitle"
@@ -172,83 +277,221 @@
                         android:layout_height="wrap_content"
                         android:text="Introducción al Cableado"
                         android:textColor="#265CAF"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginBottom="12dp" />
 
                     <TextView
-                        android:id="@+id/cableadoIntroDescription"
+                        android:id="@+id/introDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Instalamos cableado estructurado que cumple normativas actuales y crece contigo."
-                        android:textSize="16sp"
-                        android:textColor="#555555" />
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Tarjeta: Beneficios -->
+            <!-- Tarjeta: Beneficios mejorada -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/benefitsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
-                    <ImageView
-                        android:id="@+id/cableadoBenefitsImage"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginBottom="16dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_benefi" />
-
-                    <TextView
-                        android:id="@+id/benefitsTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Beneficios"
-                        android:textColor="#265CAF"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:id="@+id/cableadoBenefitsDescription"
+                    <!-- Header de beneficios -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="✔️ Optimiza rendimiento\n✔️ Simplifica mantenimiento\n✔️ Reduce costos operativos."
-                        android:textSize="16sp"
-                        android:textColor="#555555"
-                        android:gravity="center" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="20dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginEnd="16dp"
+                            app:cardBackgroundColor="#6B9BD1"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="6dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_benefi"
+                                android:contentDescription="@string/benefits_icon_description" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/benefitsTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Beneficios"
+                            android:textColor="#265CAF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Lista de beneficios -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Beneficio 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Optimiza rendimiento de red"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <!-- Beneficio 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Simplifica mantenimiento"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <!-- Beneficio 3 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Reduce costos operativos"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Botón de contacto -->
-            <Button
+            <!-- Botón CTA mejorado -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/contactButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="24dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="#265CAF"
-                android:textColor="#FFFFFF"
                 android:text="CONTÁCTANOS"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:textSize="16sp" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                app:cornerRadius="16dp"
+                app:elevation="8dp"
+                app:iconGravity="textStart"
+                app:rippleColor="#80FFFFFF"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

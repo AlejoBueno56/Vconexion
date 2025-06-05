@@ -8,28 +8,64 @@
     android:background="#F5F7FA"
     tools:context=".home.servicios.CCTVFragment">
 
-    <!-- Botón de regreso -->
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_back"
-        android:contentDescription="@string/back_button"
-        app:tint="#265caf"
+    <!-- Header con gradiente -->
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="#F5F7FA"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ScrollView para el contenido -->
-    <ScrollView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backButtonCard"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="42dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            app:tint="#265caf" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/headerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="CCTV - Seguridad Total"
+        android:textColor="#265CAF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/backButtonCard"
+        app:layout_constraintStart_toEndOf="@id/backButtonCard"
+        app:layout_constraintTop_toTopOf="@id/backButtonCard"
+        app:layout_constraintVertical_bias="0.571" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="80dp"
-        android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -38,184 +74,436 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:paddingHorizontal="20dp">
 
-            <!-- Título principal -->
-            <TextView
-                android:id="@+id/cctvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CCTV - Seguridad Total"
-                android:textColor="#265CAF"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp" />
+            <!-- Imagen principal mejorada -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/heroImageCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="#265CAF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp">
 
-            <!-- Imagen principal -->
-            <ImageView
-                android:id="@+id/cctvImageMain"
-                android:layout_width="320dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_background"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_cctvmain" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/heroIcon"
+                        android:layout_width="345dp"
+                        android:layout_height="171dp"
+                        android:contentDescription="@string/cctv_main_description"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_security"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.505"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.551" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Tarjeta: ¿Por qué elegir Vconexión? -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/whyChooseCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="16dp">
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <!-- Icono en círculo -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="#265CAF"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="6dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_security"
+                            android:contentDescription="@string/security_icon_description" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:id="@+id/cctvSubtitle1"
+                        android:id="@+id/whyChooseTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="¿Por qué elegir Vconexión?"
-                        android:textColor="#333333"
+                        android:textColor="#265CAF"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginBottom="12dp" />
 
                     <TextView
-                        android:id="@+id/cctvDescription1"
+                        android:id="@+id/whyChooseDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Ofrecemos soluciones de CCTV adaptadas a tus necesidades, con equipos de alta tecnología y personal especializado para garantizar tu seguridad 24/7."
-                        android:textColor="#555555"
-                        android:textSize="16sp"
-                        android:gravity="center" />
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Imagen secundaria -->
-            <ImageView
-                android:id="@+id/cctvImageSecondary"
-                android:layout_width="320dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/secondaryImageCard"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_background"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_cctvcams" />
+                app:cardBackgroundColor="#4A7BC8"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp">
+
+                <ImageView
+                    android:id="@+id/secondaryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/cctv_cameras_description"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_camera" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Tarjeta: Servicios que ofrecemos -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/servicesCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="16dp">
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="#4A7BC8"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="6dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_cctv1"
+                            android:contentDescription="@string/services_icon_description" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <TextView
-                        android:id="@+id/cctvSubtitle2"
+                        android:id="@+id/servicesTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Servicios que Ofrecemos"
-                        android:textColor="#333333"
+                        android:textColor="#265CAF"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginBottom="12dp" />
 
                     <TextView
-                        android:id="@+id/cctvDescription2"
+                        android:id="@+id/servicesDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="• Instalación de cámaras HD y 4K\n• Monitoreo remoto 24/7\n• Mantenimiento preventivo y correctivo\n• Soporte técnico especializado"
-                        android:textColor="#555555"
-                        android:textSize="16sp"
-                        android:gravity="center" />
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Imagen beneficios -->
-            <ImageView
-                android:id="@+id/cctvImageBenefits"
-                android:layout_width="320dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_background"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_cctvbenefits" />
-
-            <!-- Tarjeta: Beneficios -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/benefitsImageCard"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#6B9BD1"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp">
+
+                <ImageView
+                    android:id="@+id/benefitsImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/cctv_benefits_description"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_securityc" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Tarjeta: Beneficios mejorada -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/benefitsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
-                    <TextView
-                        android:id="@+id/cctvSubtitle3"
-                        android:layout_width="wrap_content"
+                    <!-- Header de beneficios -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Beneficios de Nuestros Sistemas"
-                        android:textColor="#265CAF"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="20dp">
 
-                    <TextView
-                        android:id="@+id/cctvDescription3"
-                        android:layout_width="wrap_content"
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginEnd="16dp"
+                            app:cardBackgroundColor="#6B9BD1"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="6dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_benefit"
+                                android:contentDescription="@string/star_icon_description" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/benefitsTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Beneficios de Nuestros Sistemas"
+                            android:textColor="#265CAF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Lista de beneficios -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="✔️ Seguridad continua 24/7\n\n✔️ Grabaciones de alta calidad\n\n✔️ Acceso remoto desde cualquier dispositivo\n\n✔️ Reducción de riesgos y pérdidas"
-                        android:textColor="#555555"
-                        android:textSize="16sp"
-                        android:gravity="start" />
+                        android:orientation="vertical">
+
+                        <!-- Beneficio 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Seguridad continua 24/7"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <!-- Beneficio 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Grabaciones de alta calidad"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <!-- Beneficio 3 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Acceso remoto desde cualquier dispositivo"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <!-- Beneficio 4 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#08265CAF"
+                            android:padding="12dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:cardBackgroundColor="#265CAF"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check"
+                                    android:contentDescription="@string/check_icon_description" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Reducción de riesgos y pérdidas"
+                                android:textColor="#333333"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-            <!-- Botón de contacto -->
-            <Button
+
+            <!-- Botón CTA mejorado -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/contactButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="24dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="#265CAF"
-                android:textColor="#FFFFFF"
                 android:text="CONTÁCTANOS"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:textSize="16sp" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                app:cornerRadius="16dp"
+                app:elevation="8dp"
+                app:iconGravity="textStart"
+                app:rippleColor="#80FFFFFF"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

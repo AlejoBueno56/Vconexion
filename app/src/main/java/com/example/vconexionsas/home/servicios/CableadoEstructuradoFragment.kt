@@ -1,6 +1,5 @@
 package com.example.vconexionsas.home.servicios
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,72 +7,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.vconexionsas.R
-import com.example.vconexionsas.databinding.FragmentCableadoEstructuradoBinding
-import com.example.vconexionsas.utils.ContactoUtils
+import com.google.android.material.button.MaterialButton
 
 class CableadoEstructuradoFragment : Fragment() {
-
-    private var _binding: FragmentCableadoEstructuradoBinding? = null
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCableadoEstructuradoBinding.inflate(inflater, container, false)
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            parentFragmentManager.popBackStack()
-        }
-
-        return binding.root
-    }
+    ): View? = inflater.inflate(R.layout.fragment_cableado_estructurado, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val backButton = view.findViewById<ImageButton>(R.id.backButton)
+        val contactButton = view.findViewById<MaterialButton>(R.id.contactButton)
 
         val animacionEntrada = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in_slide_up)
         val scaleTap = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_tap)
 
         listOf(
-            binding.cableadoHeaderImage,
-            binding.titleServicios,
-            binding.cableadoSubtitle1,
-            binding.cableadoDescription1,
-            binding.cableadoSubtitle2,
-            binding.cableadoDescription2,
-            binding.cableadoIntroDescription,
-            binding.cableadoBenefitsImage,
-            binding.cableadoBenefitsDescription,
-            binding.contactButton
-        ).forEach { it.startAnimation(animacionEntrada) }
+            R.id.headerTitle,
+            R.id.Icon,R.id.heroIcon, R.id.heroImageCard,
+            R.id.reliabilityCard, R.id.reliabilityTitle, R.id.reliabilityDescription,
+            R.id.differenceCard, R.id.differenceTitle, R.id.differenceDescription,
+            R.id.introCard, R.id.introTitle, R.id.introDescription,
+            R.id.benefitsCard, R.id.benefitsTitle,
+            R.id.contactButton
+        ).forEach {
+            view.findViewById<View>(it)?.startAnimation(animacionEntrada)
+        }
 
-        binding.contactButton.setOnClickListener {
-            it.startAnimation(scaleTap)
-
-            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.CABLEADO)
-            val mensaje = "¡Hola! Estoy interesado en conocer más sobre su servicio de Cableado Estructurado."
-            val url = "https://api.whatsapp.com/send?phone=$numero&text=${Uri.encode(mensaje)}"
-
-            try {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(intent)
-            } catch (e: Exception) {
-                e.printStackTrace()
+        contactButton.setOnClickListener {
+            contactButton.startAnimation(scaleTap)
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:soporte@vconexion.com")
+                putExtra(Intent.EXTRA_SUBJECT, "Consulta sobre Cableado Estructurado")
             }
+            startActivity(intent)
         }
 
-        binding.backButton.setOnClickListener {
-            findNavController().navigateUp()
+        backButton.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            parentFragmentManager.popBackStack()
+        }
     }
 }
+
+

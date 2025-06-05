@@ -33,7 +33,7 @@ class SesionPagosFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sesion_pagos, container, false)
 
-        view.findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.backButton).setOnClickListener {
             findNavController().popBackStack()
         }
 

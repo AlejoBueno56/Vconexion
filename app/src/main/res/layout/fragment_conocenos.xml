@@ -8,19 +8,29 @@
     android:background="#F5F7FA"
     tools:context=".home.conocenos.ConocenosFragment">
 
-    <!-- Botón de regreso -->
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_back"
-        android:contentDescription="@string/back_button"
-        app:tint="#265caf"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backButtonCard"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="42dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            app:tint="#265caf"
+            android:src="@drawable/ic_back" />
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Contenido desplazable -->
     <ScrollView

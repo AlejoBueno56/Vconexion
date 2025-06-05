@@ -1,6 +1,5 @@
 package com.example.vconexionsas.home.servicios
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.vconexionsas.R
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.example.vconexionsas.utils.ContactoUtils
 
 class DomoticaFragment : Fragment() {
@@ -27,20 +28,24 @@ class DomoticaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backButton: ImageButton = view.findViewById(R.id.backButton)
-        val contactButton: Button = view.findViewById(R.id.contactButton)
+        val backButton = view.findViewById<ImageButton>(R.id.backButton)
+        val contactButton = view.findViewById<MaterialButton>(R.id.contactButton)
 
         val animacionEntrada = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in_slide_up)
         val scaleTap = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_tap)
 
+        // Animar vistas principales
         listOf(
-            R.id.domoticaTitle, R.id.domoticaImage, R.id.domoticaDescription,
-            R.id.domoticaIntroTitle, R.id.domoticaIntroDescription,
-            R.id.benefitsImage, R.id.domoticaBenefitsTitle, R.id.domoticaBenefits
-        ).forEach { view.findViewById<View>(it).startAnimation(animacionEntrada) }
+            R.id.heroImageCard,
+            R.id.controlCard, R.id.controlTitle, R.id.controlDescription,
+            R.id.introCard, R.id.introTitle, R.id.introDescription,
+            R.id.benefitsCard, R.id.benefitsTitle,
+            R.id.contactButton
+        ).forEach {
+            view.findViewById<View>(it)?.startAnimation(animacionEntrada)
+        }
 
-        contactButton.startAnimation(animacionEntrada)
-
+        // Acción botón de contacto
         contactButton.setOnClickListener {
             contactButton.startAnimation(scaleTap)
             val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.DOMOTICA)
@@ -55,6 +60,7 @@ class DomoticaFragment : Fragment() {
             }
         }
 
+        // Acción botón de regreso
         backButton.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }

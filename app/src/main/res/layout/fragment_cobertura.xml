@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F7FA">
 
     <!-- Botón de regreso -->
 
@@ -13,19 +13,29 @@
     <!-- Imagen del mapa -->
 
     <!-- Texto animado -->
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="44dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/back_button"
-        android:src="@drawable/ic_back"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backButtonCard"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="42dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#265CAF" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            app:tint="#265caf"
+            android:src="@drawable/ic_back" />
+    </com.google.android.material.card.MaterialCardView>
     <TextView
         android:id="@+id/tituloCobertura"
         android:layout_width="wrap_content"

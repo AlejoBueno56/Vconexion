@@ -9,7 +9,6 @@ import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.widget.Button
-import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -17,10 +16,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.example.vconexionsas.R
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class NotificacionesFragment : Fragment() {
 
-    private lateinit var switchNotificaciones: Switch
+    private lateinit var switchNotificaciones: SwitchMaterial
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +48,8 @@ class NotificacionesFragment : Fragment() {
 
         if (activadas) {
             NotificacionScheduler.programarNotificacionMensual(requireContext())
-            Log.d("NotificacionesFragment", "✅ Notificación reprogramada automáticamente al iniciar")
+            Log.d("NotificacionesFragment", "Notificación reprogramada al abrir la app")
+            Toast.makeText(requireContext(), "Las notificaciones están activas", Toast.LENGTH_SHORT).show()
         }
 
         switchNotificaciones.setOnCheckedChangeListener { _, isChecked ->
@@ -88,6 +89,3 @@ class NotificacionesFragment : Fragment() {
         return view
     }
 }
-
-
-

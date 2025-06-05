@@ -18,6 +18,7 @@ import com.example.vconexionsas.utils.ContactoUtils
 import com.example.vconexionsas.utils.VersionUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.squareup.picasso.Picasso
 
 class InicioFragment : Fragment() {
@@ -26,6 +27,7 @@ class InicioFragment : Fragment() {
     private lateinit var descripcionPromo: TextView
     private lateinit var imagenPromo: ImageView
     private val db = FirebaseFirestore.getInstance()
+    private var promoListener: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,12 +72,18 @@ class InicioFragment : Fragment() {
         }
 
         view.findViewById<MaterialCardView>(R.id.LineaComercialCard).setOnClickListener {
-            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.COMERCIAL)
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(
+                requireContext(),
+                ContactoUtils.TipoContacto.COMERCIAL
+            )
             abrirChatWhatsapp(requireContext(), numero)
         }
 
         view.findViewById<MaterialCardView>(R.id.LineaFacturacionCard).setOnClickListener {
-            val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.FACTURACION)
+            val numero = ContactoUtils.obtenerNumeroWhatsapp(
+                requireContext(),
+                ContactoUtils.TipoContacto.FACTURACION
+            )
             abrirChatWhatsapp(requireContext(), numero)
         }
         view.findViewById<MaterialCardView>(R.id.trasladoCard).setOnClickListener {
@@ -127,7 +135,7 @@ class InicioFragment : Fragment() {
             else -> "promo_actual"
         }
 
-        db.collection("promociones").document(documentoPromocion)
+        promoListener = db.collection("promociones").document(documentoPromocion)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Log.e("Firestore", "Error al obtener promoción para $sede: ${error.message}")
@@ -143,7 +151,10 @@ class InicioFragment : Fragment() {
                 val descripcion = snapshot.getString("descripcion") ?: ""
                 val imagenUrl = snapshot.getString("imagenUrl") ?: ""
 
-                Log.d("Firestore", "Promo ($sede): titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl")
+                Log.d(
+                    "Firestore",
+                    "Promo ($sede): titulo=$titulo, descripcion=$descripcion, imagenUrl=$imagenUrl"
+                )
 
                 tituloPromo.text = titulo
                 descripcionPromo.text = descripcion
@@ -164,7 +175,14 @@ class InicioFragment : Fragment() {
                 }
             }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        promoListener?.remove()
+        promoListener = null
+    }
 }
+
 
 
 

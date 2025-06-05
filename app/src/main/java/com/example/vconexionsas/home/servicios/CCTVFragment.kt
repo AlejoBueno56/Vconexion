@@ -11,6 +11,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.vconexionsas.R
 import com.example.vconexionsas.utils.ContactoUtils
+import com.google.android.material.card.MaterialCardView
 
 class CCTVFragment : Fragment() {
 
@@ -25,13 +26,35 @@ class CCTVFragment : Fragment() {
         val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in_slide_up)
         val scaleTap = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_tap)
 
+        // Aplicar animaciones a las nuevas tarjetas según la estructura del XML
         listOf(
-            R.id.cctvTitle, R.id.cctvImageMain, R.id.cctvSubtitle1, R.id.cctvDescription1,
-            R.id.cctvImageSecondary, R.id.cctvSubtitle2, R.id.cctvDescription2,
-            R.id.cctvImageBenefits, R.id.cctvSubtitle3, R.id.cctvDescription3
-        ).forEach { view.findViewById<View>(it).startAnimation(fadeIn) }
+            R.id.heroImageCard,
+            R.id.reliabilityCard,
+            R.id.differenceCard,
+            R.id.introCard,
+            R.id.benefitsCard
+        ).forEach {
+            view.findViewById<MaterialCardView>(it)?.startAnimation(fadeIn)
+        }
 
         contactButton.startAnimation(fadeIn)
+
+        // Configurar click listeners para las tarjetas (opcional)
+        view.findViewById<MaterialCardView>(R.id.reliabilityCard)?.setOnClickListener {
+            it.startAnimation(scaleTap)
+        }
+
+        view.findViewById<MaterialCardView>(R.id.differenceCard)?.setOnClickListener {
+            it.startAnimation(scaleTap)
+        }
+
+        view.findViewById<MaterialCardView>(R.id.introCard)?.setOnClickListener {
+            it.startAnimation(scaleTap)
+        }
+
+        view.findViewById<MaterialCardView>(R.id.benefitsCard)?.setOnClickListener {
+            it.startAnimation(scaleTap)
+        }
 
         contactButton.setOnClickListener {
             it.startAnimation(scaleTap)

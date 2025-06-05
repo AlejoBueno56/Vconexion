@@ -74,15 +74,25 @@
     <string name="seccion_planes_titulo">Nuestros Planes</string>
     <string name="seccion_servicios_titulo">Servicios Disponibles</string>
     <string name="instrucciones_contrasena">
-1. Acércate a tu ONU o Módem.\n
-2. Verifica que no haya ningún LED en rojo.\n
-3. Verifica en la parte posterior o inferior el modelo de la ONU.\n
-4. Selecciona la imagen de acuerdo al modelo de la ONU.\n
-5. En la parte inferior derecha selecciona la opción de autocompletar.\n
-6. Busca la ventana "Network", selecciona la opción "WLAN".\n
-7. Entra a "Security" y donde dice "WPA Passphrase" puedes cambiar la contraseña.\n
-8. Guarda los cambios en la opción "Submit".
+<![CDATA[
+<b>Preparación:</b><br/>
+• Ubícate cerca de tu ONU/módem<br/>
+• Verifica que no haya luces rojas<br/>
+<br/>
+<b>Detección automática:</b><br/>
+• Usa "Detectar ONU" para identificar tu equipo<br/>
+• La app abrirá la interfaz web automáticamente<br/>
+<br/>
+<b>Configuración manual:</b><br/>
+• Ve a "Network" → "Wireless" → "Security"<br/>
+• Busca "WPA Passphrase" o "Contraseña Wi-Fi"<br/>
+• Ingresa tu nueva contraseña<br/>
+• Guarda los cambios con "Submit"<br/>
+<br/>
+<b>⚠️ Importante:</b> No modifiques otras configuraciones
+]]>
 </string>
+
     <string name="selecciona_mes_anio">Selecciona mes y año</string>
     <string name="buscar_factura">Buscar factura</string>
     <string name="recuperar_contrasena">Recuperar Contraseña</string>
@@ -130,5 +140,116 @@
     <string name="menu_modelos">Modelos ONU disponibles ▼</string>
     <string name="menu_modelos_abierto">Modelos ONU disponibles ▲</string>
 
+    <!-- Títulos -->
+    <string name="domotica_title">Domótica</string>
+    <string name="control_home_title">Controla tu hogar</string>
+    <string name="what_is_domotics_title">¿Qué es Domótica?</string>
+    <string name="benefits_title">Beneficios</string>
+
+    <!-- Descripciones -->
+    <string name="control_home_description">Controla luces, temperatura y seguridad desde tu móvil con nuestras soluciones de domótica inteligente.</string>
+    <string name="what_is_domotics_description">La automatización de viviendas permite mayor confort, seguridad y ahorro energético a través de tecnología inteligente.</string>
+
+    <!-- Beneficios -->
+    <string name="benefit_energy_saving">Ahorro energético inteligente</string>
+    <string name="benefit_security">Seguridad reforzada 24/7</string>
+    <string name="benefit_comfort">Comodidad y control total</string>
+    <string name="benefit_modern_lifestyle">Estilo de vida moderno</string>
+
+    <string name="smart_home_icon_description">Icono de casa inteligente</string>
+    <string name="smartphone_icon_description">Icono de smartphone</string>
+    <string name="lightbulb_icon_description">Icono de bombilla</string>
+    <string name="star_icon_description">Icono de estrella</string>
+    <string name="check_icon_description">Icono de verificación</string>
+
+    <!-- Botones -->
+    <string name="contact_us_button">CONTÁCTANOS</string>
+
+    <!-- Strings para Cableado Estructurado -->
+
+    <!-- Content Descriptions -->
+    <string name="structured_cabling_icon_description">Ícono de cableado estructurado</string>
+    <string name="reliability_icon_description">Ícono de confiabilidad</string>
+    <string name="company_logo_description">Logo de la empresa</string>
+    <string name="intro_icon_description">Ícono de introducción</string>
+    <string name="benefits_icon_description">Ícono de beneficios</string>
+
+    <!-- Títulos principales -->
+    <string name="cableado_title">Cableado Estructurado</string>
+
+    <!-- Contenido de tarjetas -->
+    <string name="reliability_title">Cuando el fracaso no es una opción</string>
+    <string name="reliability_description">Maximiza tu infraestructura tecnológica con cableado confiable, eficiente y flexible.</string>
+
+    <string name="difference_title">¿Qué nos hace diferentes?</string>
+    <string name="difference_description">Tecnología de punta, escalabilidad y máxima fiabilidad en nuestras soluciones de cableado.</string>
+
+    <string name="intro_cabling_title">Introducción al Cableado</string>
+    <string name="intro_cabling_description">Instalamos cableado estructurado que cumple normativas actuales y crece contigo.</string>
+
+
+    <!-- Beneficios individuales -->
+    <string name="benefit_performance">Optimiza rendimiento de red</string>
+    <string name="benefit_maintenance">Simplifica mantenimiento</string>
+    <string name="benefit_costs">Reduce costos operativos</string>
+
+    <!-- Strings para CCTV Fragment -->
+
+    <!-- Títulos principales -->
+    <string name="cctv_title">CCTV - Seguridad Total</string>
+
+    <!-- Content descriptions para accesibilidad -->
+    <string name="cctv_main_description">Imagen principal de sistema CCTV</string>
+    <string name="security_icon_description">Icono de seguridad</string>
+    <string name="services_icon_description">Icono de servicios</string>
+    <string name="cctv_cameras_description">Imagen de cámaras CCTV</string>
+    <string name="cctv_benefits_description">Imagen de beneficios CCTV</string>
+
+    <!-- Títulos de secciones -->
+    <string name="why_choose_vconexion_title">¿Por qué elegir Vconexión?</string>
+    <string name="services_offered_title">Servicios que Ofrecemos</string>
+    <string name="system_benefits_title">Beneficios de Nuestros Sistemas</string>
+
+    <!-- Descripciones -->
+    <string name="why_choose_description">Ofrecemos soluciones de CCTV adaptadas a tus necesidades, con equipos de alta tecnología y personal especializado para garantizar tu seguridad 24/7.</string>
+
+    <string name="services_description">• Instalación de cámaras HD y 4K\n• Monitoreo remoto 24/7\n• Mantenimiento preventivo y correctivo\n• Soporte técnico especializado</string>
+
+    <!-- Beneficios individuales -->
+    <string name="benefit_security_247">Seguridad continua 24/7</string>
+    <string name="benefit_high_quality_recording">Grabaciones de alta calidad</string>
+    <string name="benefit_remote_access">Acceso remoto desde cualquier dispositivo</string>
+    <string name="benefit_risk_reduction">Reducción de riesgos y pérdidas</string>
+
+    <!-- Strings para fragment_iptv.xml -->
+    !-- IPTV Fragment strings -->
+    <string name="vconexion_iptv">Vconexión IPTV</string>
+    <string name="intro_title">¿Qué es IPTV y Por Qué Elegir Vconexión?</string>
+    <string name="intro_description">La televisión por streaming (IPTV) ha revolucionado la forma de consumir contenido audiovisual. Vconexión S.A.S ofrece más de 3000 canales y películas seleccionadas para ti.</string>
+    <string name="content_title">Amplia Variedad de Contenidos</string>
+    <string name="content_description">Accede a noticias, deportes, entretenimiento y películas actualizadas para toda la familia.</string>
+    <string name="benefits_titleiptv">Beneficios de Vconexión IPTV</string>
+    <string name="benefit_1">Más de 3000 canales disponibles</string>
+    <string name="benefit_2">Interfaz fácil de usar y navegar</string>
+    <string name="benefit_3">Servicio confiable y estable</string>
+    <string name="benefit_4">Actualizaciones constantes de contenido</string>
+    <string name="contact_button">CONTÁCTANOS</string>
+
+
+    <!-- Descripciones de accesibilidad -->
+    <string name="iptv_hero_description">Imagen principal de IPTV</string>
+    <string name="tv_icon_description">Icono de televisión</string>
+    <string name="content_icon_description">Icono de contenido variado</string>
+
+    <!--Notificaciones-->
+
+    <string name="notificaciones_title">Notificaciones</string>
+    <string name="reminder_title">Recordatorio mensual</string>
+    <string name="reminder_description">Activa el recordatorio para que recibas una notificación el día 5 de cada mes y no olvides pagar tu factura.</string>
+    <string name="switch_reminder">Activar recordatorio mensual</string>
+    <string name="volver">Volver</string>
+    <string name="notification_icon">Icono de notificación</string>
+
 
 </resources>
+

@@ -13,8 +13,8 @@ object NotificacionScheduler {
     fun programarNotificacionMensual(context: Context) {
         val calendar = Calendar.getInstance().apply {
             set(Calendar.DAY_OF_MONTH, 5)
-            set(Calendar.HOUR_OF_DAY, 7)
-            set(Calendar.MINUTE, 0)
+            set(Calendar.HOUR_OF_DAY, 8)
+            set(Calendar.MINUTE, 15)
             set(Calendar.SECOND, 0)
             if (before(Calendar.getInstance())) add(Calendar.MONTH, 1)
         }

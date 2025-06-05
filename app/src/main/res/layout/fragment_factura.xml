@@ -3,40 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".home.factura.FacturaFragment">
 
+    <!-- Contenido principal -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/facturaLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F5F7FA"
-        android:paddingTop="16dp">
-        <!-- Botón de regreso -->
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back"
-            android:contentDescription="@string/back_button"
-            app:tint="#265caf"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="#F5F7FA">
 
+        <!-- Botón de retroceso -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/backButtonCard"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="42dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back_button"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back"
+                app:tint="#265caf" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Título principal -->
         <TextView
             android:id="@+id/facturaTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="140dp"
             android:text="Fecha de Pago"
-            android:textColor="#265caf"
+            android:textColor="#265CAF"
             android:textSize="26sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Detalles del plan -->
         <TextView
             android:id="@+id/planActual"
             android:layout_width="wrap_content"
@@ -45,34 +61,35 @@
             android:text="Plan Actual: Plan Familiar (50 MB)"
             android:textColor="#555555"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/facturaTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/facturaTitle" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/fechaPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="Próxima carga: 05-MM-YYYY"
             android:textColor="#555555"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planActual"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planActual" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Valor a pagar destacado -->
         <TextView
             android:id="@+id/valorPagar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="$0"
-            android:textColor="#265caf"
+            android:textColor="#265CAF"
             android:textSize="36sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fechaPago"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fechaPago" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/estadoPago"
@@ -80,14 +97,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Estado: Pendiente"
-            android:textColor="#265caf"
+            android:textColor="#265CAF"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/valorPagar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/valorPagar" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Spinner Mes -->
+        <!-- Filtros ocultos -->
         <Spinner
             android:id="@+id/spinnerMes"
             android:layout_width="0dp"
@@ -95,68 +112,83 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerAnio"
+            app:layout_constraintTop_toBottomOf="@id/estadoPago"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/estadoPago" />
+            app:layout_constraintEnd_toStartOf="@+id/spinnerAnio" />
 
-        <!-- Spinner Año -->
         <Spinner
             android:id="@+id/spinnerAnio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/estadoPago"
             app:layout_constraintStart_toEndOf="@id/spinnerMes"
-            app:layout_constraintTop_toBottomOf="@id/estadoPago" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
+        <!-- Botones de acción -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/descargarFacturaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="48dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#ffffff"
             android:text="Descargar tu factura"
-            android:textColor="#265caf"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="#265CAF"
+            android:backgroundTint="#FFFFFF"
+            app:cornerRadius="16dp"
+            app:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/spinnerAnio"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerAnio" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/detalleUltimaFacturaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#ffffff"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:text="Detalle última facturación"
-            android:textColor="#265caf"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="#265CAF"
+            android:backgroundTint="#FFFFFF"
+            app:cornerRadius="16dp"
+            app:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/descargarFacturaButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descargarFacturaButton" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/pagoPlanButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#ffffff"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:text="Realiza tu pago"
-            android:textColor="#265caf"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="#265CAF"
+            android:backgroundTint="#FFFFFF"
+            app:cornerRadius="16dp"
+            app:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/detalleUltimaFacturaButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detalleUltimaFacturaButton" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Barra de carga centrada y sobrepuesta -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </FrameLayout>
+
+
+
+
+
 

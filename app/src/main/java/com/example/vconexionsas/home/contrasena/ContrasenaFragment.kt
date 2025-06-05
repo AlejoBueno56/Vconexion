@@ -7,9 +7,9 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -53,11 +53,9 @@ class ContrasenaFragment : Fragment() {
         // Navegación tarjetas ONU
         configurarTarjeta(view, R.id.card_adc, R.id.action_contrasenaFragment_to_adcFragment, scaleTap)
         configurarTarjeta(view, R.id.card_easylink, R.id.action_contrasenaFragment_to_easy4linkFragment, scaleTap)
-        //configurarTarjeta(view, R.id.card_tplink, R.id.action_contrasenaFragment_to_tplinkFragment, scaleTap)
         configurarTarjeta(view, R.id.card_latic, R.id.action_contrasenaFragment_to_laticFragment, scaleTap)
         configurarTarjeta(view, R.id.card_zkxx, R.id.action_contrasenaFragment_to_zkxxFragment, scaleTap)
         configurarTarjeta(view, R.id.card_ztec, R.id.action_contrasenaFragment_to_ztecFragment, scaleTap)
-        //configurarTarjeta(view, R.id.card_zten, R.id.action_contrasenaFragment_to_ztenFragment, scaleTap)
 
         // Botón detectar ONU (tarjeta dedicada)
         view.findViewById<MaterialCardView>(R.id.btn_detectar_onu)?.setOnClickListener {
@@ -65,23 +63,15 @@ class ContrasenaFragment : Fragment() {
             navController.navigate(R.id.action_contrasenaFragment_to_fragmentPruebaDetectarONU)
         }
 
-        // Menú desplegable de modelos ONU
-        val menuModelos = view.findViewById<View>(R.id.layout_modelos_onu)
-        val tituloMenu = view.findViewById<TextView>(R.id.titulo_menu_modelos)
-        val contenedorExpandible = view.findViewById<ViewGroup>(R.id.menu_modelos)
+        // Configurar menú desplegable de modelos ONU
+        configurarMenuModelos(view)
 
-        tituloMenu.setOnClickListener {
-            TransitionManager.beginDelayedTransition(contenedorExpandible, AutoTransition())
-            if (menuModelos.visibility == View.GONE) {
-                menuModelos.visibility = View.VISIBLE
-                tituloMenu.text = getString(R.string.menu_modelos_abierto)
-            } else {
-                menuModelos.visibility = View.GONE
-                tituloMenu.text = getString(R.string.menu_modelos)
-            }
-        }
+        // Configurar sección de ayuda colapsible
+        configurarSeccionAyuda(view)
+
         // Botón de contacto por WhatsApp usando ContactoUtils
         view.findViewById<MaterialCardView>(R.id.btn_contactar)?.setOnClickListener {
+            it.startAnimation(scaleTap)
             val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.TECNICO)
             val mensaje = "Hola, necesito ayuda con mi Wi-Fi"
             val url = "https://wa.me/$numero?text=${java.net.URLEncoder.encode(mensaje, "UTF-8")}"
@@ -91,8 +81,74 @@ class ContrasenaFragment : Fragment() {
             }
             startActivity(intent)
         }
+    }
 
+    private fun configurarMenuModelos(view: View) {
+        val menuModelos = view.findViewById<View>(R.id.layout_modelos_onu)
+        val spacerModelos = view.findViewById<View>(R.id.spacer_modelos)
+        val tituloMenu = view.findViewById<TextView>(R.id.titulo_menu_modelos)
+        val contenedorExpandible = view.findViewById<ViewGroup>(R.id.menu_modelos)
+        val arrowIndicator = view.findViewById<ImageView>(R.id.arrow_indicator)
 
+        tituloMenu.setOnClickListener {
+            TransitionManager.beginDelayedTransition(contenedorExpandible, AutoTransition())
+
+            val isExpanded = menuModelos.visibility == View.VISIBLE
+
+            if (isExpanded) {
+                // Colapsar
+                menuModelos.visibility = View.GONE
+                spacerModelos.visibility = View.GONE
+                tituloMenu.text = getString(R.string.menu_modelos)
+                arrowIndicator.rotation = 0f
+            } else {
+                // Expandir
+                menuModelos.visibility = View.VISIBLE
+                spacerModelos.visibility = View.VISIBLE
+                tituloMenu.text = getString(R.string.menu_modelos_abierto)
+                arrowIndicator.rotation = 180f
+            }
+        }
+    }
+
+    private fun configurarSeccionAyuda(view: View) {
+        val ayudaHeader = view.findViewById<View>(R.id.ayuda_header)
+        val instruccionesContainer = view.findViewById<View>(R.id.instrucciones_container)
+        val ayudaContainer = view.findViewById<ViewGroup>(R.id.ayuda_container)
+        val helpArrowIndicator = view.findViewById<ImageView>(R.id.help_arrow_indicator)
+
+        ayudaHeader.setOnClickListener {
+            toggleExpandableSection(
+                container = ayudaContainer,
+                content = instruccionesContainer,
+                arrow = helpArrowIndicator
+            )
+        }
+    }
+
+    private fun toggleExpandableSection(
+        container: ViewGroup,
+        content: View,
+        title: TextView? = null,
+        arrow: ImageView? = null,
+        closedText: String? = null,
+        openText: String? = null
+    ) {
+        TransitionManager.beginDelayedTransition(container, AutoTransition())
+
+        val isExpanded = content.visibility == View.VISIBLE
+
+        if (isExpanded) {
+            // Colapsar
+            content.visibility = View.GONE
+            title?.text = closedText
+            arrow?.rotation = 0f
+        } else {
+            // Expandir
+            content.visibility = View.VISIBLE
+            title?.text = openText
+            arrow?.rotation = 180f
+        }
     }
 
     private fun configurarTarjeta(view: View, cardId: Int, actionId: Int, animacion: android.view.animation.Animation) {
@@ -103,5 +159,4 @@ class ContrasenaFragment : Fragment() {
         }
     }
 }
-
 

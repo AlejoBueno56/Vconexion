@@ -2,43 +2,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F7FA">
 
-    <!-- Botón de regreso -->
-    <ImageButton
-        android:id="@+id/backButtonServicios"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_back"
-        android:contentDescription="Botón volver"
-        app:tint="#265caf"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/backButtonCard"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="42dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            app:tint="#265caf"
+            android:src="@drawable/ic_back" />
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- ScrollView para el contenido -->
     <ScrollView
         android:id="@+id/scrollViewServicios"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="419dp"
+        android:layout_height="612dp"
         android:layout_marginTop="80dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true"
         android:padding="16dp"
-        android:fillViewport="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layoutServicios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <!-- Título principal -->
 
@@ -48,8 +59,8 @@
                 android:id="@+id/tituloServicios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
                 android:text="Nuestros Servicios"
                 android:textColor="#265CAF"
                 android:textSize="26sp"
@@ -59,23 +70,23 @@
                 android:id="@+id/domoticaCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="@android:color/transparent"
                     android:gravity="center_vertical"
-                    android:padding="16dp"
-                    android:background="@android:color/transparent">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/iconDomotica"
@@ -101,22 +112,22 @@
                 android:id="@+id/cableadoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="@android:color/transparent"
                     android:gravity="center_vertical"
-                    android:padding="16dp"
-                    android:background="@android:color/transparent">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/iconCableado"
@@ -142,22 +153,22 @@
                 android:id="@+id/iptvCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="@android:color/transparent"
                     android:gravity="center_vertical"
-                    android:padding="16dp"
-                    android:background="@android:color/transparent">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/iconIPTV"
@@ -183,14 +194,14 @@
                 android:id="@+id/CCTVCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="32dp"
                 android:clickable="true"
                 android:focusable="true"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

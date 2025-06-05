@@ -17,15 +17,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="15dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Volver"
-            android:src="@drawable/ic_back"
-            app:tint="@color/primary" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/backButtonCard"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back_button"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back"
+                app:tint="#265caf" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textModeloONU"

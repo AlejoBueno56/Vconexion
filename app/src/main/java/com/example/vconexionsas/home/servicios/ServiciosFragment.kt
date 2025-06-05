@@ -29,7 +29,7 @@ class ServiciosFragment : Fragment() {
         val cableadoCard: MaterialCardView = view.findViewById(R.id.cableadoCard)
         val iptvCard: MaterialCardView = view.findViewById(R.id.iptvCard)
         val cctvCard: MaterialCardView = view.findViewById(R.id.CCTVCard)
-        val backButton: ImageButton = view.findViewById(R.id.backButtonServicios)
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
 
         // Cargar animación
         val animacionEntrada = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in_slide_up)
