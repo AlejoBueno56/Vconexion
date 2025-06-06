@@ -137,8 +137,8 @@
     <string name="btn_contactar">¿No entendiste? Contáctanos y te asesoramos</string>
     <string name="icono_detectar">Icono de detección</string>
     <string name="icono_contacto">Icono de contacto</string>
-    <string name="menu_modelos">Modelos ONU disponibles ▼</string>
-    <string name="menu_modelos_abierto">Modelos ONU disponibles ▲</string>
+    <string name="menu_modelos">Modelos ONU disponibles </string>
+    <string name="menu_modelos_abierto">Modelos ONU disponibles </string>
 
     <!-- Títulos -->
     <string name="domotica_title">Domótica</string>

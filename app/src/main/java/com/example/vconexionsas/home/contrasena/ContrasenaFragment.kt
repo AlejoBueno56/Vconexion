@@ -14,11 +14,14 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.example.vconexionsas.R
 import com.example.vconexionsas.utils.ContactoUtils
 import com.google.android.material.card.MaterialCardView
+import java.net.URLEncoder
 
 class ContrasenaFragment : Fragment() {
 
@@ -57,24 +60,49 @@ class ContrasenaFragment : Fragment() {
         configurarTarjeta(view, R.id.card_zkxx, R.id.action_contrasenaFragment_to_zkxxFragment, scaleTap)
         configurarTarjeta(view, R.id.card_ztec, R.id.action_contrasenaFragment_to_ztecFragment, scaleTap)
 
-        // Botón detectar ONU (tarjeta dedicada)
+        // Botón detectar ONU
         view.findViewById<MaterialCardView>(R.id.btn_detectar_onu)?.setOnClickListener {
             it.startAnimation(scaleTap)
             navController.navigate(R.id.action_contrasenaFragment_to_fragmentPruebaDetectarONU)
         }
 
-        // Configurar menú desplegable de modelos ONU
+        // Menú de modelos ONU
         configurarMenuModelos(view)
 
-        // Configurar sección de ayuda colapsible
+        // Sección de ayuda
         configurarSeccionAyuda(view)
 
-        // Botón de contacto por WhatsApp usando ContactoUtils
+        // Botón de contacto por WhatsApp con nombre y código
         view.findViewById<MaterialCardView>(R.id.btn_contactar)?.setOnClickListener {
             it.startAnimation(scaleTap)
+
+            val masterKey = MasterKey.Builder(requireContext())
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+
+            val prefs = EncryptedSharedPreferences.create(
+                requireContext(),
+                "secure_user_prefs",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+
+            val nombre = prefs.getString("nombre_usuario", "Usuario")
+            val codigo = prefs.getString("codigo_usuario", "000000")
+
             val numero = ContactoUtils.obtenerNumeroWhatsapp(requireContext(), ContactoUtils.TipoContacto.TECNICO)
-            val mensaje = "Hola, necesito ayuda con mi Wi-Fi"
-            val url = "https://wa.me/$numero?text=${java.net.URLEncoder.encode(mensaje, "UTF-8")}"
+            val mensaje = """
+        *Solicitud desde la App VConexion*
+
+        *Nombre del usuario:* $nombre
+        *Código de cliente:* $codigo
+
+        Solicito asistencia para cambiar la contraseña de mi red Wi-Fi.
+        Agradezco su ayuda con este proceso.
+    """.trimIndent()
+
+            val url = "https://wa.me/$numero?text=${URLEncoder.encode(mensaje, "UTF-8")}"
 
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(url)
@@ -96,13 +124,11 @@ class ContrasenaFragment : Fragment() {
             val isExpanded = menuModelos.visibility == View.VISIBLE
 
             if (isExpanded) {
-                // Colapsar
                 menuModelos.visibility = View.GONE
                 spacerModelos.visibility = View.GONE
                 tituloMenu.text = getString(R.string.menu_modelos)
                 arrowIndicator.rotation = 0f
             } else {
-                // Expandir
                 menuModelos.visibility = View.VISIBLE
                 spacerModelos.visibility = View.VISIBLE
                 tituloMenu.text = getString(R.string.menu_modelos_abierto)
@@ -139,12 +165,10 @@ class ContrasenaFragment : Fragment() {
         val isExpanded = content.visibility == View.VISIBLE
 
         if (isExpanded) {
-            // Colapsar
             content.visibility = View.GONE
             title?.text = closedText
             arrow?.rotation = 0f
         } else {
-            // Expandir
             content.visibility = View.VISIBLE
             title?.text = openText
             arrow?.rotation = 180f
@@ -159,4 +183,5 @@ class ContrasenaFragment : Fragment() {
         }
     }
 }
+
 

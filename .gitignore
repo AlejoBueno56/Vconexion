@@ -1,9 +1,39 @@
-# Evita subir archivos innecesarios
+# Archivos generados por el sistema y el IDE
 .gradle/
 .idea/
 *.iml
-build/
-*.apk
-*.keystore
 .DS_Store
+Thumbs.db
+
+# Archivos de compilación
+/build/
+*/build/
+*.apk
+*.ap_
+
+# Claves y certificados
+*.keystore
+*.jks
+
+# Configuraciones locales
+local.properties
+
+# Archivos sensibles
+**/google-services.json
+firebase-debug.log
+
+# Archivos de entorno (si usas .env)
+.env
+.env.*
+
+# Dependencias externas
 node_modules/
+npm-debug.log
+
+# Carpetas comunes de backend
+.vscode/
+dist/
+out/
+
+# Otros
+*.log

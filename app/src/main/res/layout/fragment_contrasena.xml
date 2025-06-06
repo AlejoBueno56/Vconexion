@@ -34,8 +34,8 @@
 
     <!-- Scroll principal -->
     <ScrollView
-        android:layout_width="412dp"
-        android:layout_height="619dp"
+        android:layout_width="394dp"
+        android:layout_height="664dp"
         android:layout_marginTop="80dp"
         android:fillViewport="true"
         android:padding="16dp"

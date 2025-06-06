@@ -30,7 +30,6 @@
             app:tint="#265caf" />
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Título centrado -->
     <TextView
         android:id="@+id/titlePagos"
         android:layout_width="wrap_content"
@@ -44,7 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tarjeta contenedora moderna -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardPagos"
         android:layout_width="0dp"
@@ -62,11 +60,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:padding="24dp">
 
-            <!-- Imagen QR -->
             <ImageView
                 android:id="@+id/qrImage"
                 android:layout_width="200dp"
@@ -76,47 +73,119 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/qr_placeholder" />
 
-            <!-- Título info -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/cuenta_bancaria"
-                android:textAlignment="center"
-                android:textColor="#444444"
+                android:text="Cuenta bancaria - Ahorros - Bancolombia"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="#444444"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textAlignment="center" />
 
-            <!-- Información de cuenta bancaria -->
             <TextView
+                android:id="@+id/textoCuenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/info_banco"
-                android:textAlignment="center"
-                android:textColor="#666666"
+                android:layout_marginBottom="8dp"
+                android:text="Cuenta: 47600000740\nNIT: 901398501"
                 android:textSize="14sp"
+                android:textColor="#666666"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textIsSelectable="true" />
 
-            <!-- Recordatorio destacado -->
+            <!-- Botones pequeños -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"
+                android:weightSum="2">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnCopiarCuenta"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#265CAF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/ic_content_copy"
+                            app:tint="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cuenta"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnCopiarNIT"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#265CAF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/ic_content_copy"
+                            app:tint="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NIT"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Recordatorio -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:background="#FFF0F0"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:padding="12dp">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/warning_icon"
                     android:src="@drawable/ic_warning"
+                    android:contentDescription="@string/warning_icon"
                     app:tint="#D32F2F" />
 
                 <TextView
@@ -130,23 +199,22 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Botón WhatsApp -->
+            <!-- Botón enviar comprobante -->
             <Button
                 android:id="@+id/btnEnviarComprobante"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@string/enviar_comprobante"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 android:backgroundTint="#265CAF"
                 android:paddingStart="24dp"
-                android:paddingTop="14dp"
                 android:paddingEnd="24dp"
+                android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:text="@string/enviar_comprobante"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 app:cornerRadius="16dp" />
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
